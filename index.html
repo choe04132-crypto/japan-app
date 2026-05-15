@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>여행 일본어 🎌</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;background:#f9f7f4;color:#1a1a1a;min-height:100vh}
+.app{max-width:480px;margin:0 auto;background:#fff;min-height:100vh}
+.screen{display:none}.screen.active{display:block}
+.topbar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid #e8e5e0;background:#fff;position:sticky;top:0;z-index:10}
+.back-btn{background:none;border:none;cursor:pointer;color:#888;padding:0;font-size:20px;line-height:1;flex-shrink:0}
+.topbar-title{font-size:16px;font-weight:600;color:#1a1a1a;flex:1}
+.topbar-right{font-size:12px;color:#888;flex-shrink:0}
+.switch-btn{background:none;border:1px solid #e0ddd8;border-radius:8px;padding:5px 10px;cursor:pointer;font-size:12px;color:#666;flex-shrink:0}
+.sec-label{font-size:11px;font-weight:600;color:#999;letter-spacing:.06em;text-transform:uppercase;padding:18px 16px 8px}
+.nav-list{padding:0 16px;display:flex;flex-direction:column;gap:8px}
+.nav-item{display:flex;align-items:center;gap:12px;padding:14px;background:#fff;border:1px solid #e8e5e0;border-radius:14px;cursor:pointer}
+.nav-item:active{background:#f5f3f0}
+.nav-icon{font-size:22px;width:32px;text-align:center;flex-shrink:0}
+.nav-text{flex:1}.nav-title{font-size:14px;font-weight:600;color:#1a1a1a}
+.nav-sub{font-size:12px;color:#888;margin-top:2px}
+.nb-wrap{width:56px;height:4px;background:#e8e5e0;border-radius:99px;overflow:hidden;flex-shrink:0}
+.nb-fill{height:100%;border-radius:99px;transition:width .4s}
+.fill-me{background:#c0392b}.fill-wife{background:#d4537e}
+.user-section{padding:32px 20px}
+.user-cards{display:flex;flex-direction:column;gap:10px}
+.user-card{display:flex;align-items:center;gap:14px;padding:16px;background:#fff;border:1px solid #e8e5e0;border-radius:16px;cursor:pointer}
+.user-card:active{background:#f5f3f0}
+.u-av{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.av-me{background:#fef0ee}.av-wife{background:#fbeaf0}
+.u-name{font-size:16px;font-weight:600;color:#1a1a1a}
+.u-prog{font-size:12px;color:#888;margin-top:2px}
+.u-bar{height:3px;background:#e8e5e0;border-radius:99px;margin-top:7px;overflow:hidden}
+.u-bar-fill{height:100%;border-radius:99px}
+.daily-box{margin:12px 16px 0;padding:14px 16px;background:#f9f7f4;border:1px solid #e8e5e0;border-radius:16px}
+.daily-lbl{font-size:11px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.daily-items{display:flex;flex-direction:column;gap:10px}
+.d-item{background:#fff;border:1px solid #e8e5e0;border-radius:14px;overflow:hidden}
+.d-top{display:flex;align-items:center;gap:10px;padding:11px 13px}
+.d-main{flex:1}.d-jp{font-size:15px;font-weight:600;color:#1a1a1a;margin-bottom:1px}
+.d-ro{font-size:11px;color:#c0392b;margin-bottom:1px;font-weight:500}.d-kr{font-size:12px;color:#666}
+.spk-xs{width:32px;height:32px;border-radius:50%;border:1px solid #e0ddd8;background:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:#888;flex-shrink:0}
+.spk-xs.speaking{border-color:#c0392b;color:#c0392b}
+.reply-toggle{width:100%;padding:7px 13px;background:none;border:none;border-top:1px solid #f0ede8;cursor:pointer;font-size:11px;color:#aaa;text-align:left;font-family:inherit;display:flex;align-items:center;gap:5px}
+.reply-toggle.open{color:#c0392b;background:#fff8f5}
+.replies-box{padding:10px 13px 12px;background:#fff8f5;border-top:1px solid #fde8e0;display:none}
+.replies-box.open{display:block}
+.replies-title{font-size:11px;font-weight:600;color:#c0392b;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em}
+.reply-item{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px}
+.reply-item:last-child{margin-bottom:0}
+.reply-bubble{flex:1;background:#fff;border:1px solid #fde0d8;border-radius:10px;padding:8px 10px}
+.r-jp{font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:2px}
+.r-ro{font-size:10px;color:#c0392b;margin-bottom:2px;font-weight:500}
+.r-kr{font-size:11px;color:#888}
+.spk-reply{width:28px;height:28px;border-radius:50%;border:1px solid #fde0d8;background:none;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;color:#c0392b;flex-shrink:0;margin-top:2px}
+.topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 16px 20px}
+.tc{padding:15px;background:#fff;border:1px solid #e8e5e0;border-radius:16px;cursor:pointer}
+.tc:active{background:#f5f3f0}
+.tc-icon{font-size:24px;margin-bottom:8px}.tc-name{font-size:14px;font-weight:600;color:#1a1a1a}
+.tc-cnt{font-size:12px;color:#888;margin-top:2px}
+.tc-bar{height:3px;border-radius:99px;background:#e8e5e0;margin-top:10px;overflow:hidden}
+.tc-fill{height:100%;border-radius:99px;background:#c0392b}
+.pw{padding:0 16px 32px}
+.yt-btn{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#f9f7f4;border:1px solid #e8e5e0;border-radius:12px;text-decoration:none;margin:14px 0}
+.yt-logo{width:24px;height:24px;background:#FF0000;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.yt-logo svg{width:12px;height:12px;fill:white}
+.yt-info{flex:1}.yt-t{font-size:13px;font-weight:600;color:#1a1a1a}.yt-s{font-size:11px;color:#888}
+.pl{display:flex;flex-direction:column;gap:8px}
+.pc{background:#fff;border:1px solid #e8e5e0;border-radius:14px;padding:12px 14px}
+.pc.done{border-color:#4caf50}
+.pc-top{display:flex;align-items:center;gap:10px}
+.pm{flex:1;min-width:0}
+.p-jp{font-size:15px;font-weight:600;color:#1a1a1a;margin-bottom:2px}
+.p-ro{font-size:11px;color:#c0392b;margin-bottom:2px;font-weight:500}.p-kr{font-size:13px;color:#666}
+.spk-btn{width:36px;height:36px;border-radius:50%;border:1px solid #e0ddd8;background:none;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;color:#888;flex-shrink:0}
+.spk-btn.speaking{border-color:#c0392b;color:#c0392b}
+.done-dot{width:8px;height:8px;border-radius:50%;background:#4caf50;flex-shrink:0}
+.master-btn{margin-top:9px;width:100%;padding:8px;border:1px dashed #d0ccc8;border-radius:10px;background:none;cursor:pointer;font-size:12px;color:#aaa;font-family:inherit;text-align:center}
+.master-btn:active{border-color:#f0a500;color:#f0a500;background:#fffbf0}
+.mastered-section{margin-top:14px;padding:12px 14px;background:#fffcf0;border:1px solid #f0d080;border-radius:14px}
+.mastered-header{display:flex;align-items:center;justify-content:space-between}
+.mastered-label{font-size:13px;font-weight:600;color:#b8860b}
+.toggle-btn{font-size:12px;padding:4px 10px;border:1px solid #f0d080;border-radius:8px;background:none;cursor:pointer;color:#b8860b}
+.mastered-list{margin-top:10px;display:flex;flex-direction:column;gap:7px}
+.mc-card{background:#fff;border:1px solid #f0d080;border-radius:12px;padding:10px 13px;display:flex;align-items:center;gap:10px;opacity:.85}
+.qbox{margin-top:20px;padding:16px;background:#f9f7f4;border-radius:16px;border:1px solid #e8e5e0}
+.q-lbl{font-size:12px;font-weight:600;color:#888;margin-bottom:10px}
+.q-q{font-size:15px;font-weight:600;color:#1a1a1a;padding:12px 14px;background:#fff;border-radius:12px;border:1px solid #e8e5e0;margin-bottom:10px;line-height:1.5}
+.q-opts{display:flex;flex-direction:column;gap:7px}
+.qopt{padding:10px 13px;border:1px solid #e0ddd8;border-radius:12px;background:#fff;cursor:pointer;font-size:14px;color:#1a1a1a;text-align:left;font-family:inherit;line-height:1.4}
+.qopt:active:not(:disabled){background:#f5f3f0}
+.qopt.correct{background:#f0faf0;border-color:#4caf50;color:#2e7d32}
+.qopt.wrong{background:#fff0ee;border-color:#f44336;color:#c62828}
+.q-res{font-size:13px;margin-top:9px;min-height:20px;font-weight:500}
+.q-next{margin-top:10px;font-size:13px;color:#c0392b;background:none;border:1px solid #c0392b;border-radius:10px;padding:7px 16px;cursor:pointer;font-family:inherit;font-weight:500;display:none}
+.vault-wrap{padding:0 16px 32px}
+.vault-empty{padding:48px 20px;text-align:center;color:#bbb;font-size:14px;line-height:2}
+.v-sec-lbl{font-size:12px;font-weight:600;color:#888;margin:16px 0 8px;padding:6px 11px;background:#f5f3f0;border-radius:10px}
+.vc{background:#fff;border:1px solid #e8e5e0;border-radius:14px;padding:13px 14px;margin-bottom:8px}
+.vc-top{display:flex;align-items:center;gap:10px}
+.vc-main{flex:1}
+.vc-jp{font-size:15px;font-weight:600;color:#1a1a1a;margin-bottom:2px}
+.vc-ro{font-size:11px;color:#c0392b;font-weight:500;margin-bottom:2px}.vc-kr{font-size:13px;color:#666}
+.vc-actions{display:flex;gap:6px;margin-top:10px}
+.vc-btn{flex:1;padding:8px;border-radius:10px;border:none;cursor:pointer;font-size:12px;font-family:inherit;font-weight:600}
+.vc-ok{background:#f0faf0;color:#2e7d32}
+.vc-no{background:#fff0ee;color:#c0392b}
+.hira-wrap{padding:0 16px 32px}
+.hrow-lbl{font-size:11px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.06em;margin:16px 0 8px}
+.hrow{display:flex;gap:7px;flex-wrap:wrap}
+.hcard{width:58px;height:66px;background:#fff;border:1px solid #e8e5e0;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+.hcard:active{transform:scale(.95)}.hcard.lh{border-color:#4caf50;background:#f0faf0}
+.h-c{font-size:24px;color:#1a1a1a;line-height:1}.h-r{font-size:10px;color:#888;margin-top:4px;font-weight:500}.hcard.lh .h-r{color:#4caf50}
+.kata-wrap{padding:0 16px 32px}
+.kintro{padding:10px 0 6px;font-size:13px;color:#666;line-height:1.7}
+.kg-lbl{font-size:12px;font-weight:600;color:#666;margin:16px 0 9px;padding:7px 11px;background:#f5f3f0;border-radius:10px}
+.kcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.kcard{background:#fff;border:1px solid #e8e5e0;border-radius:14px;padding:11px 13px;cursor:pointer;display:flex;align-items:center;gap:9px}
+.kcard:active{transform:scale(.97)}.kcard.lk{border-color:#4caf50;background:#f0faf0}
+.k-c{font-size:18px;font-weight:600;color:#1a1a1a;flex-shrink:0;width:28px;text-align:center}
+.k-w{font-size:13px;font-weight:600;color:#1a1a1a}.k-k{font-size:11px;color:#888;margin-top:2px}
+.tip-box{margin-top:18px;padding:13px 15px;background:#fff8f5;border-left:3px solid #c0392b;font-size:13px;color:#666;line-height:1.7}
+.other-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-top:1px solid #e8e5e0}
+/* ─── 스트릭 ─── */
+.streak-bar{display:flex;align-items:center;gap:10px;padding:10px 16px;background:linear-gradient(135deg,#fff8f0,#fff5ee);border-bottom:1px solid #fde8cc}
+.streak-fire{font-size:24px;line-height:1}
+.streak-info{flex:1}
+.streak-num{font-size:17px;font-weight:700;color:#e67e22;line-height:1.2}
+.streak-lbl{font-size:11px;color:#aaa;margin-top:1px}
+.streak-today{font-size:11px;padding:4px 9px;border-radius:8px;font-weight:600;flex-shrink:0}
+.st-done{background:#f0faf0;color:#2e7d32}
+.st-notyet{background:#fff0ee;color:#c0392b}
+/* ─── 검색 ─── */
+.search-inp{flex:1;padding:8px 12px;border:1px solid #e0ddd8;border-radius:10px;font-size:14px;font-family:inherit;outline:none;background:#f9f7f4;min-width:0}
+.search-inp:focus{border-color:#c0392b;background:#fff}
+.search-wrap{padding:12px 16px 32px}
+.s-empty{padding:40px 20px;text-align:center;color:#bbb;font-size:14px;line-height:2}
+.sr{background:#fff;border:1px solid #e8e5e0;border-radius:14px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.sr-info{flex:1;min-width:0}
+.sr-topic{font-size:10px;color:#aaa;margin-bottom:3px}
+.sr-jp{font-size:15px;font-weight:600;color:#1a1a1a}
+.sr-ro{font-size:11px;color:#c0392b;font-weight:500;margin-top:1px}
+.sr-kr{font-size:12px;color:#666;margin-top:2px}
+/* ─── 퀴즈 모드 탭 ─── */
+.qmode-tabs{display:flex;gap:5px;margin-bottom:12px}
+.qmt{flex:1;padding:7px 4px;border:1px solid #e0ddd8;border-radius:10px;background:#fff;cursor:pointer;font-size:11px;color:#888;font-family:inherit;text-align:center;line-height:1.3}
+.qmt.active{border-color:#c0392b;color:#c0392b;background:#fff8f5;font-weight:600}
+.listen-card{padding:22px 16px;text-align:center;background:#fff8f5;border-radius:14px;border:1px solid #fde0d8;margin-bottom:12px;cursor:pointer}
+.listen-icon{font-size:42px;margin-bottom:6px}
+.listen-hint{font-size:12px;color:#c0392b;font-weight:500}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- 사용자 선택 -->
+<div id="sc-user" class="screen active">
+  <div class="user-section">
+    <div style="font-size:28px;margin-bottom:10px">🎌</div>
+    <div style="font-size:22px;font-weight:700;margin-bottom:6px">안녕하세요!</div>
+    <div style="font-size:14px;color:#666;margin-bottom:28px;line-height:1.6">누구로 시작할까요?<br>각자 진도가 따로 저장돼요.</div>
+    <div class="user-cards" id="user-cards"></div>
+  </div>
+</div>
+
+<!-- 홈 -->
+<div id="sc-home" class="screen">
+  <div class="topbar">
+    <span class="topbar-title" id="home-title"></span>
+    <button class="switch-btn" onclick="go('sc-search')" style="padding:5px 9px">🔍</button>
+    <button class="switch-btn" onclick="goUser()">전환</button>
+  </div>
+  <div id="streak-bar"></div>
+  <div id="daily-box" class="daily-box"></div>
+  <div class="sec-label">학습 메뉴</div>
+  <div class="nav-list">
+    <div class="nav-item" onclick="go('sc-hira')">
+      <div class="nav-icon">あ</div>
+      <div class="nav-text"><div class="nav-title">히라가나 기초</div><div class="nav-sub">46자 발음 익히기</div></div>
+      <div class="nb-wrap"><div id="nb-hira" class="nb-fill" style="width:0%"></div></div>
+      <span style="color:#ccc;font-size:18px">›</span>
+    </div>
+    <div class="nav-item" onclick="go('sc-kata')">
+      <div class="nav-icon">ア</div>
+      <div class="nav-text"><div class="nav-title">가타카나 메뉴판</div><div class="nav-sub">식당·카페 음식 단어 25개</div></div>
+      <div class="nb-wrap"><div id="nb-kata" class="nb-fill" style="width:0%"></div></div>
+      <span style="color:#ccc;font-size:18px">›</span>
+    </div>
+    <div class="nav-item" onclick="go('sc-topics')">
+      <div class="nav-icon">✈️</div>
+      <div class="nav-text"><div class="nav-title">여행 표현</div><div class="nav-sub" id="travel-sub">상황별 표현</div></div>
+      <div class="nb-wrap"><div id="nb-travel" class="nb-fill" style="width:0%"></div></div>
+      <span style="color:#ccc;font-size:18px">›</span>
+    </div>
+    <div class="nav-item" onclick="go('sc-vault')" style="border-color:#f0d080;background:#fffcf0">
+      <div class="nav-icon">⭐</div>
+      <div class="nav-text">
+        <div class="nav-title" style="color:#b8860b">외운 표현 보관함</div>
+        <div class="nav-sub" id="vault-nav-sub">완벽히 외운 표현 모아보기</div>
+      </div>
+      <span style="color:#ccc;font-size:18px">›</span>
+    </div>
+  </div>
+  <div class="sec-label" style="margin-top:6px">상대방 진도</div>
+  <div style="padding:0 16px 20px" id="other-stat"></div>
+</div>
+
+<!-- 검색 -->
+<div id="sc-search" class="screen">
+  <div class="topbar">
+    <button class="back-btn" onclick="go('sc-home')" aria-label="뒤로">←</button>
+    <input class="search-inp" type="text" id="search-input" placeholder="일본어·한국어·발음 검색..." oninput="doSearch(this.value)" autocomplete="off">
+    <button class="switch-btn" onclick="document.getElementById('search-input').value='';doSearch('')" style="padding:5px 9px">✕</button>
+  </div>
+  <div class="search-wrap" id="search-results">
+    <div class="s-empty">🔍 검색어를 입력하세요<br><br>일본어 · 한국어 · 발음<br>모두 검색 가능해요</div>
+  </div>
+</div>
+
+<!-- 히라가나 -->
+<div id="sc-hira" class="screen">
+  <div class="topbar">
+    <button class="back-btn" onclick="go('sc-home')" aria-label="뒤로">←</button>
+    <span class="topbar-title">히라가나 기초</span>
+    <span class="topbar-right" id="hira-lbl"></span>
+  </div>
+  <div class="hira-wrap" id="hira-content"></div>
+</div>
+
+<!-- 가타카나 -->
+<div id="sc-kata" class="screen">
+  <div class="topbar">
+    <button class="back-btn" onclick="go('sc-home')" aria-label="뒤로">←</button>
+    <span class="topbar-title">가타카나 메뉴판</span>
+    <span class="topbar-right" id="kata-lbl"></span>
+  </div>
+  <div class="kata-wrap" id="kata-content"></div>
+</div>
+
+<!-- 주제 목록 -->
+<div id="sc-topics" class="screen">
+  <div class="topbar">
+    <button class="back-btn" onclick="go('sc-home')" aria-label="뒤로">←</button>
+    <span class="topbar-title">여행 표현</span>
+  </div>
+  <div style="padding:12px 16px 8px;font-size:13px;color:#888">주제를 선택하세요</div>
+  <div class="topic-grid" id="topic-grid" style="margin-top:4px"></div>
+</div>
+
+<!-- 표현 목록 -->
+<div id="sc-phrase" class="screen">
+  <div class="topbar">
+    <button class="back-btn" onclick="go('sc-topics')" aria-label="뒤로">←</button>
+    <span class="topbar-title" id="phrase-title"></span>
+    <span class="topbar-right" id="phrase-lbl"></span>
+  </div>
+  <div class="pw" id="phrase-content"></div>
+</div>
+
+<!-- 보관함 -->
+<div id="sc-vault" class="screen">
+  <div class="topbar">
+    <button class="back-btn" onclick="go('sc-home')" aria-label="뒤로">←</button>
+    <span class="topbar-title">⭐ 외운 표현 보관함</span>
+    <span class="topbar-right" id="vault-lbl"></span>
+  </div>
+  <div class="vault-wrap" id="vault-content"></div>
+</div>
+
+</div>
+<script>
+const USERS=[{id:'me',name:'나',icon:'👨',avCls:'av-me',fillCls:'fill-me'},{id:'wife',name:'아내',icon:'👩',avCls:'av-wife',fillCls:'fill-wife'}];
+const HIRA=[
+  {row:'あ행',chars:[{c:'あ',r:'a'},{c:'い',r:'i'},{c:'う',r:'u'},{c:'え',r:'e'},{c:'お',r:'o'}]},
+  {row:'か행',chars:[{c:'か',r:'ka'},{c:'き',r:'ki'},{c:'く',r:'ku'},{c:'け',r:'ke'},{c:'こ',r:'ko'}]},
+  {row:'さ행',chars:[{c:'さ',r:'sa'},{c:'し',r:'shi'},{c:'す',r:'su'},{c:'せ',r:'se'},{c:'そ',r:'so'}]},
+  {row:'た행',chars:[{c:'た',r:'ta'},{c:'ち',r:'chi'},{c:'つ',r:'tsu'},{c:'て',r:'te'},{c:'と',r:'to'}]},
+  {row:'な행',chars:[{c:'な',r:'na'},{c:'に',r:'ni'},{c:'ぬ',r:'nu'},{c:'ね',r:'ne'},{c:'の',r:'no'}]},
+  {row:'は행',chars:[{c:'は',r:'ha'},{c:'ひ',r:'hi'},{c:'ふ',r:'fu'},{c:'へ',r:'he'},{c:'ほ',r:'ho'}]},
+  {row:'ま행',chars:[{c:'ま',r:'ma'},{c:'み',r:'mi'},{c:'む',r:'mu'},{c:'め',r:'me'},{c:'も',r:'mo'}]},
+  {row:'や행',chars:[{c:'や',r:'ya'},{c:'ゆ',r:'yu'},{c:'よ',r:'yo'}]},
+  {row:'ら행',chars:[{c:'ら',r:'ra'},{c:'り',r:'ri'},{c:'る',r:'ru'},{c:'れ',r:'re'},{c:'ろ',r:'ro'}]},
+  {row:'わ행',chars:[{c:'わ',r:'wa'},{c:'を',r:'wo'},{c:'ん',r:'n'}]},
+];
+const KATA_GROUPS=[
+  {label:'음료 🍺',items:[{k:'ビール',r:'비-루',kr:'맥주'},{k:'コーヒー',r:'코-히-',kr:'커피'},{k:'ジュース',r:'쥬-스',kr:'주스'},{k:'ワイン',r:'와인',kr:'와인'},{k:'ウーロン茶',r:'우-론차',kr:'우롱차'},{k:'コーラ',r:'코-라',kr:'콜라'}]},
+  {label:'음식 🍽️',items:[{k:'ステーキ',r:'스테-키',kr:'스테이크'},{k:'ピザ',r:'피자',kr:'피자'},{k:'パスタ',r:'파스타',kr:'파스타'},{k:'カレー',r:'카레-',kr:'카레'},{k:'ハンバーグ',r:'함바-구',kr:'함박스테이크'},{k:'サラダ',r:'사라다',kr:'샐러드'},{k:'スープ',r:'스-프',kr:'수프'},{k:'サンドイッチ',r:'산도잇치',kr:'샌드위치'}]},
+  {label:'디저트 🍰',items:[{k:'ケーキ',r:'케-키',kr:'케이크'},{k:'アイス',r:'아이스',kr:'아이스크림'},{k:'プリン',r:'푸린',kr:'푸딩'},{k:'チョコレート',r:'쵸코레-토',kr:'초콜릿'}]},
+  {label:'메뉴판 필수 📋',items:[{k:'メニュー',r:'메뉴-',kr:'메뉴'},{k:'セット',r:'셋토',kr:'세트 메뉴'},{k:'サービス',r:'사-비스',kr:'서비스'},{k:'テイクアウト',r:'테이쿠아우토',kr:'테이크아웃'}]},
+];
+const ALL_KATA=KATA_GROUPS.flatMap(g=>g.items);
+
+const TOPICS=[
+  {id:'restaurant',icon:'🍜',name:'식당',yt:{url:'https://www.youtube.com/watch?v=FFHjLoPbbcg',title:'식당 일본어 50문장 완전정리',sub:'한국어 해설 · 실전 상황별'},
+   phrases:[
+    {jp:'すみません！',ro:'스미마셍',kr:'저기요!',replies:[
+      {jp:'はい、少々お待ちください。',ro:'하이, 쇼-쇼- 오마치 쿠다사이',kr:'네, 잠시만 기다려주세요.'},
+      {jp:'はい、何でしょうか？',ro:'하이, 난데쇼-까',kr:'네, 무엇을 도와드릴까요?'},
+      {jp:'ただいまお伺いします。',ro:'타다이마 오우카가이시마스',kr:'지금 바로 가겠습니다.'},
+    ]},
+    {jp:'メニューを見せてください。',ro:'메뉴-오 미세테 쿠다사이',kr:'메뉴판을 보여주세요.',replies:[
+      {jp:'どうぞ。',ro:'도-조',kr:'여기 있습니다.'},
+      {jp:'こちらがメニューです。',ro:'코치라가 메뉴-데스',kr:'이쪽이 메뉴판입니다.'},
+      {jp:'英語のメニューもありますよ。',ro:'에-고노 메뉴-모 아리마스요',kr:'영어 메뉴판도 있어요.'},
+    ]},
+    {jp:'おすすめは何ですか？',ro:'오스스메와 난데스까',kr:'추천 메뉴가 뭔가요?',replies:[
+      {jp:'ラーメンがおすすめです！',ro:'라-멘가 오스스메데스',kr:'라멘을 추천합니다!'},
+      {jp:'今日は刺身が新鮮ですよ。',ro:'쿄-와 사시미가 신센데스요',kr:'오늘은 회가 신선해요.'},
+      {jp:'セットメニューが人気です。',ro:'셋토 메뉴-가 닌키데스',kr:'세트 메뉴가 인기 있어요.'},
+    ]},
+    {jp:'これをください。',ro:'코레오 쿠다사이',kr:'이것을 주세요.',replies:[
+      {jp:'かしこまりました。',ro:'카시코마리마시타',kr:'알겠습니다. (정중한 표현)'},
+      {jp:'少々お待ちください。',ro:'쇼-쇼- 오마치 쿠다사이',kr:'잠시만 기다려주세요.'},
+      {jp:'ご注文は以上でよろしいですか？',ro:'고추-몬와 이죠-데 요로시이데스까',kr:'주문은 이것으로 괜찮으세요?'},
+    ]},
+    {jp:'同じものをください。',ro:'오나지 모노오 쿠다사이',kr:'같은 걸로 주세요.',replies:[
+      {jp:'かしこまりました。',ro:'카시코마리마시타',kr:'알겠습니다.'},
+      {jp:'少々お待ちください。',ro:'쇼-쇼- 오마치 쿠다사이',kr:'잠시만 기다려주세요.'},
+      {jp:'もちろんです！',ro:'모치론데스',kr:'물론이죠!'},
+    ]},
+    {jp:'辛くないですか？',ro:'카라쿠나이데스까',kr:'맵지 않나요?',replies:[
+      {jp:'少し辛いですが、大丈夫ですよ。',ro:'스코시 카라이데스가, 다이죠-부데스요',kr:'조금 맵지만 괜찮아요.'},
+      {jp:'全然辛くないですよ！',ro:'젠젠 카라쿠나이데스요',kr:'전혀 안 매워요!'},
+      {jp:'辛さは調整できますよ。',ro:'카라사와 쵸-세이 데키마스요',kr:'맵기 조절 가능해요.'},
+    ]},
+    {jp:'アレルギーがあります。',ro:'아레루기-가 아리마스',kr:'알레르기가 있습니다.',replies:[
+      {jp:'何のアレルギーですか？',ro:'나노 아레루기-데스까',kr:'어떤 알레르기인가요?'},
+      {jp:'シェフに確認します。',ro:'쉐후니 카쿠닌시마스',kr:'셰프에게 확인하겠습니다.'},
+      {jp:'成分表をお持ちします。',ro:'세이분효-오 오모치시마스',kr:'성분표를 가져다드리겠습니다.'},
+    ]},
+    {jp:'お水をください。',ro:'오미즈오 쿠다사이',kr:'물을 주세요.',replies:[
+      {jp:'はい、すぐにお持ちします。',ro:'하이, 스구니 오모치시마스',kr:'네, 바로 가져다드릴게요.'},
+      {jp:'お冷でよろしいですか？',ro:'오히야데 요로시이데스까',kr:'냉수로 괜찮으세요?'},
+      {jp:'どうぞ。',ro:'도-조',kr:'여기 있습니다.'},
+    ]},
+    {jp:'おかわりください。',ro:'오카와리 쿠다사이',kr:'리필 부탁해요.',replies:[
+      {jp:'はい、少々お待ちください。',ro:'하이, 쇼-쇼- 오마치 쿠다사이',kr:'네, 잠시만요.'},
+      {jp:'こちらのみ無料です。',ro:'코치라노미 무료-데스',kr:'이것만 무료입니다.'},
+      {jp:'申し訳ありませんが、おかわりはできません。',ro:'모-시와케 아리마셍가, 오카와리와 데키마셍',kr:'죄송하지만 리필은 안 됩니다.'},
+    ]},
+    {jp:'お会計をお願いします。',ro:'오카이케-오 오네가이시마스',kr:'계산 부탁합니다.',replies:[
+      {jp:'少々お待ちください。',ro:'쇼-쇼- 오마치 쿠다사이',kr:'잠시만 기다려주세요.'},
+      {jp:'レジにてお支払いください。',ro:'레지니테 오시하라이 쿠다사이',kr:'계산대에서 결제해주세요.'},
+      {jp:'合計で3000円になります。',ro:'고-케-데 산젠엔니 나리마스',kr:'합계 3000엔입니다.'},
+    ]},
+    {jp:'カードで払えますか？',ro:'카-도데 하라에마스까',kr:'카드로 낼 수 있나요?',replies:[
+      {jp:'はい、使えます。',ro:'하이, 츠카에마스',kr:'네, 가능합니다.'},
+      {jp:'申し訳ありません、現金のみです。',ro:'모-시와케 아리마셍, 겐킨노미데스',kr:'죄송합니다, 현금만 됩니다.'},
+      {jp:'Visa、Mastercardが使えます。',ro:'비자, 마스타-카-도가 츠카에마스',kr:'비자, 마스터카드 가능합니다.'},
+    ]},
+    {jp:'別々でお願いします。',ro:'벳베츠데 오네가이시마스',kr:'각자 계산 부탁합니다.',replies:[
+      {jp:'かしこまりました。',ro:'카시코마리마시타',kr:'알겠습니다.'},
+      {jp:'お一人ずつ承ります。',ro:'오히토리즈츠 우케타마와리마스',kr:'한 분씩 받겠습니다.'},
+      {jp:'では、お二人分に分けますね。',ro:'데와, 오후타리분니 와케마스네',kr:'두 분 몫으로 나누겠습니다.'},
+    ]},
+    {jp:'一緒でお願いします。',ro:'잇쇼데 오네가이시마스',kr:'같이 계산 부탁합니다.',replies:[
+      {jp:'合計で5000円になります。',ro:'고-케-데 고센엔니 나리마스',kr:'합계 5000엔입니다.'},
+      {jp:'かしこまりました。',ro:'카시코마리마시타',kr:'알겠습니다.'},
+      {jp:'一括でご請求します。',ro:'잇카츠데 고세-큐-시마스',kr:'일괄로 청구하겠습니다.'},
+    ]},
+    {jp:'おいしかったです！',ro:'오이시캇타데스',kr:'맛있었습니다!',replies:[
+      {jp:'ありがとうございます！',ro:'아리가토- 고자이마스',kr:'감사합니다!'},
+      {jp:'またぜひいらしてください。',ro:'마타 제히 이랏샤테 쿠다사이',kr:'또 꼭 와주세요.'},
+      {jp:'光栄です！',ro:'코-에-데스',kr:'영광입니다!'},
+    ]},
+    {jp:'持ち帰りできますか？',ro:'모치카에리 데키마스까',kr:'포장 가능한가요?',replies:[
+      {jp:'はい、できます。',ro:'하이, 데키마스',kr:'네, 가능합니다.'},
+      {jp:'申し訳ありません、テイクアウトはやっていません。',ro:'모-시와케 아리마셍, 테이쿠아우토와 얏테이마셍',kr:'죄송합니다, 포장은 안 됩니다.'},
+      {jp:'袋代が10円かかります。',ro:'후쿠로다이가 쥬-엔 카카리마스',kr:'봉투 비용이 10엔 듭니다.'},
+    ]},
+    {jp:'二人です。',ro:'후타리데스',kr:'두 명이에요.',replies:[
+      {jp:'少々お待ちください。',ro:'쇼-쇼- 오마치 쿠다사이',kr:'잠시만 기다려주세요.'},
+      {jp:'こちらへどうぞ。',ro:'코치라에 도-조',kr:'이쪽으로 오세요.'},
+      {jp:'ただいま満席です。少々お待ちいただけますか？',ro:'타다이마 만세키데스. 쇼-쇼- 오마치 이타다케마스까',kr:'지금 만석입니다. 잠시 기다려주실 수 있나요?'},
+    ]},
+    {jp:'禁煙席をお願いします。',ro:'킨엔세키오 오네가이시마스',kr:'금연석으로 부탁합니다.',replies:[
+      {jp:'こちらへどうぞ。',ro:'코치라에 도-조',kr:'이쪽으로 오세요.'},
+      {jp:'全席禁煙です。',ro:'젠세키 킨엔데스',kr:'전 좌석 금연입니다.'},
+      {jp:'禁煙席はこちらです。',ro:'킨엔세키와 코치라데스',kr:'금연석은 이쪽입니다.'},
+    ]},
+    {jp:'これは何ですか？',ro:'코레와 난데스까',kr:'이건 뭔가요?',replies:[
+      {jp:'それは唐揚げです。',ro:'소레와 카라아게데스',kr:'그건 가라아게(닭튀김)입니다.'},
+      {jp:'豆腐を使った料理です。',ro:'토-후오 츠캇타 료-리데스',kr:'두부를 사용한 요리입니다.'},
+      {jp:'季節の野菜です。',ro:'키세츠노 야사이데스',kr:'제철 채소입니다.'},
+    ]},
+    {jp:'辛さは選べますか？',ro:'카라사와 에라베마스까',kr:'맵기를 선택할 수 있나요?',replies:[
+      {jp:'はい、3段階から選べます。',ro:'하이, 산단카이카라 에라베마스',kr:'네, 3단계에서 선택할 수 있어요.'},
+      {jp:'辛さは選べません。',ro:'카라사와 에라베마셍',kr:'맵기 선택은 안 됩니다.'},
+      {jp:'辛口・中辛・甘口があります。',ro:'카라쿠치·츄-카라·아마쿠치가 아리마스',kr:'매운맛·보통·순한맛이 있어요.'},
+    ]},
+  ]},
+  {id:'airport',icon:'✈️',name:'공항',yt:{url:'https://www.youtube.com/watch?v=_f-ICIgfJ0c',title:'25 Must-Know Travel Phrases',sub:'영어+일본어 · 입문용'},
+   phrases:[
+    {jp:'パスポートを見せてください。',ro:'파스포-토오 미세테 쿠다사이',kr:'여권을 보여주세요.',replies:[
+      {jp:'はい、こちらです。',ro:'하이, 코치라데스',kr:'네, 여기 있습니다.'},
+      {jp:'どうぞ。',ro:'도-조',kr:'여기요.'},
+      {jp:'ありがとうございます。少々お待ちください。',ro:'아리가토- 고자이마스. 쇼-쇼- 오마치 쿠다사이',kr:'감사합니다. 잠시만요.'},
+    ]},
+    {jp:'観光です。',ro:'칸코-데스',kr:'관광입니다.',replies:[
+      {jp:'何日間の滞在ですか？',ro:'난니치칸노 타이자이데스까',kr:'며칠 체류하실 건가요?'},
+      {jp:'どちらにお泊まりですか？',ro:'도치라니 오토마리데스까',kr:'어디서 숙박하실 건가요?'},
+      {jp:'わかりました。どうぞ。',ro:'와카리마시타. 도-조',kr:'알겠습니다. 통과하세요.'},
+    ]},
+    {jp:'荷物はひとつです。',ro:'니모츠와 히토츠데스',kr:'짐은 하나입니다.',replies:[
+      {jp:'こちらに乗せてください。',ro:'코치라니 노세테 쿠다사이',kr:'여기에 올려주세요.'},
+      {jp:'重さは何キロですか？',ro:'오모사와 난키로데스까',kr:'무게는 몇 킬로인가요?'},
+      {jp:'わかりました。',ro:'와카리마시타',kr:'알겠습니다.'},
+    ]},
+    {jp:'電車はどこですか？',ro:'덴샤와 도코데스까',kr:'전철은 어디인가요?',replies:[
+      {jp:'あちらの出口を出て左です。',ro:'아치라노 데구치오 데테 히다리데스',kr:'저쪽 출구를 나와서 왼쪽입니다.'},
+      {jp:'地下1階にあります。',ro:'치카 잇카이니 아리마스',kr:'지하 1층에 있습니다.'},
+      {jp:'案内板に従ってください。',ro:'안나이반니 시타갓테 쿠다사이',kr:'안내판을 따라가세요.'},
+    ]},
+    {jp:'タクシー乗り場はどこですか？',ro:'타쿠시- 노리바와 도코데스까',kr:'택시 승강장은 어디인가요?',replies:[
+      {jp:'出口を出て右手です。',ro:'데구치오 데테 미기테데스',kr:'출구 나와서 오른쪽입니다.'},
+      {jp:'あちらです。',ro:'아치라데스',kr:'저쪽입니다.'},
+      {jp:'バスもございますよ。',ro:'바스모 고자이마스요',kr:'버스도 있어요.'},
+    ]},
+    {jp:'両替はどこですか？',ro:'료-가에와 도코데스까',kr:'환전소는 어디인가요?',replies:[
+      {jp:'到着ロビーにあります。',ro:'토-챠쿠 로비-니 아리마스',kr:'도착 로비에 있습니다.'},
+      {jp:'2階に両替所があります。',ro:'니카이니 료-가에죠가 아리마스',kr:'2층에 환전소가 있습니다.'},
+      {jp:'銀行のATMでも両替できますよ。',ro:'긴코-노 ATM데모 료-가에 데키마스요',kr:'은행 ATM에서도 환전 가능해요.'},
+    ]},
+    {jp:'荷物を預けたいです。',ro:'니모츠오 아즈케타이데스',kr:'짐을 맡기고 싶어요.',replies:[
+      {jp:'こちらでお預かりします。',ro:'코치라데 오아즈카리시마스',kr:'이쪽에서 맡아드릴게요.'},
+      {jp:'料金は1個500円です。',ro:'료-킨와 잇코 고햐쿠엔데스',kr:'요금은 1개당 500엔입니다.'},
+      {jp:'何時間ご利用ですか？',ro:'난지칸 고리요-데스까',kr:'몇 시간 이용하실 건가요?'},
+    ]},
+  ]},
+  {id:'hotel',icon:'🏨',name:'호텔',yt:{url:'https://www.youtube.com/results?search_query=호텔+체크인+일본어회화',title:'호텔 체크인 일본어',sub:'유튜브에서 검색하기'},
+   phrases:[
+    {jp:'チェックインをお願いします。',ro:'체크인오 오네가이시마스',kr:'체크인 부탁합니다.',replies:[
+      {jp:'お名前をお聞かせください。',ro:'오나마에오 오키카세 쿠다사이',kr:'성함을 알려주세요.'},
+      {jp:'パスポートをお見せください。',ro:'파스포-토오 오미세 쿠다사이',kr:'여권을 보여주세요.'},
+      {jp:'ご予約の確認ができました。',ro:'고요야쿠노 카쿠닌가 데키마시타',kr:'예약 확인이 됐습니다.'},
+    ]},
+    {jp:'予約しています。',ro:'요야쿠 시테이마스',kr:'예약했습니다.',replies:[
+      {jp:'お名前は？',ro:'오나마에와',kr:'성함이 어떻게 되시나요?'},
+      {jp:'確認できました。',ro:'카쿠닌 데키마시타',kr:'확인됐습니다.'},
+      {jp:'少々お待ちください。',ro:'쇼-쇼- 오마치 쿠다사이',kr:'잠시만 기다려주세요.'},
+    ]},
+    {jp:'Wi-Fiのパスワードは何ですか？',ro:'와이파이노 파스와-도와 난데스까',kr:'와이파이 비밀번호가 뭔가요?',replies:[
+      {jp:'こちらのカードに書いてあります。',ro:'코치라노 카-도니 카이테 아리마스',kr:'이 카드에 적혀 있습니다.'},
+      {jp:'パスワードは1234です。',ro:'파스와-도와 이치니산시데스',kr:'비밀번호는 1234입니다.'},
+      {jp:'フロントでお伝えします。',ro:'후론토데 오츠타에시마스',kr:'프런트에서 알려드릴게요.'},
+    ]},
+    {jp:'タオルをもらえますか？',ro:'타오루오 모라에마스까',kr:'수건을 받을 수 있을까요?',replies:[
+      {jp:'すぐにお持ちします。',ro:'스구니 오모치시마스',kr:'바로 가져다드릴게요.'},
+      {jp:'何枚必要ですか？',ro:'난마이 히츠요-데스까',kr:'몇 장 필요하세요?'},
+      {jp:'客室のクロゼットにございます。',ro:'캬쿠시츠노 쿠로젯토니 고자이마스',kr:'객실 옷장 안에 있습니다.'},
+    ]},
+    {jp:'チェックアウトは何時ですか？',ro:'체크아우토와 난지데스까',kr:'체크아웃은 몇 시인가요?',replies:[
+      {jp:'午前11時です。',ro:'고젠 쥬-이치지데스',kr:'오전 11시입니다.'},
+      {jp:'12時がレイトチェックアウトです。',ro:'쥬-니지가 레이토 체크아우토데스',kr:'12시가 레이트 체크아웃입니다.'},
+      {jp:'延長もできますよ。',ro:'엔쵸-모 데키마스요',kr:'연장도 가능합니다.'},
+    ]},
+    {jp:'部屋のカギをなくしました。',ro:'헤야노 카기오 나쿠시마시타',kr:'방 열쇠를 잃어버렸습니다.',replies:[
+      {jp:'お部屋番号は何番ですか？',ro:'오헤야 반고-와 난방데스까',kr:'방 번호가 몇 호인가요?'},
+      {jp:'再発行いたします。',ro:'사이핫코- 이타시마스',kr:'재발급해드리겠습니다.'},
+      {jp:'本人確認が必要です。',ro:'혼닌카쿠닌가 히츠요-데스',kr:'본인 확인이 필요합니다.'},
+    ]},
+    {jp:'近くにコンビニはありますか？',ro:'치카쿠니 콘비니와 아리마스까',kr:'근처에 편의점이 있나요?',replies:[
+      {jp:'徒歩3分のところにあります。',ro:'토호 산푼노 토코로니 아리마스',kr:'걸어서 3분 거리에 있어요.'},
+      {jp:'1階のロビー横にあります。',ro:'잇카이노 로비-요코니 아리마스',kr:'1층 로비 옆에 있어요.'},
+      {jp:'地図でご案内します。',ro:'치즈데 고안나이시마스',kr:'지도로 안내해드릴게요.'},
+    ]},
+  ]},
+  {id:'shopping',icon:'🛍️',name:'쇼핑',yt:{url:'https://www.youtube.com/results?search_query=쇼핑+일본어회화+여행',title:'쇼핑 일본어 회화',sub:'유튜브에서 검색하기'},
+   phrases:[
+    {jp:'いくらですか？',ro:'이쿠라데스까',kr:'얼마인가요?',replies:[
+      {jp:'3000円です。',ro:'산젠엔데스',kr:'3000엔입니다.'},
+      {jp:'値札をご確認ください。',ro:'네후다오 고카쿠닌 쿠다사이',kr:'가격표를 확인해주세요.'},
+      {jp:'税込みで1080円です。',ro:'제-코미데 센하치쥬-엔데스',kr:'세금 포함 1080엔입니다.'},
+    ]},
+    {jp:'試着してもいいですか？',ro:'시챠쿠 시테모 이이데스까',kr:'입어봐도 되나요?',replies:[
+      {jp:'どうぞ！試着室はこちらです。',ro:'도-조! 시챠쿠시츠와 코치라데스',kr:'물론이죠! 탈의실은 이쪽입니다.'},
+      {jp:'こちらへどうぞ。',ro:'코치라에 도-조',kr:'이쪽으로 오세요.'},
+      {jp:'サイズはいくつですか？',ro:'사이즈와 이쿠츠데스까',kr:'사이즈가 어떻게 되세요?'},
+    ]},
+    {jp:'カードで払えますか？',ro:'카-도데 하라에마스까',kr:'카드로 낼 수 있나요?',replies:[
+      {jp:'はい、使えます。',ro:'하이, 츠카에마스',kr:'네, 됩니다.'},
+      {jp:'現金のみとなります。',ro:'겐킨노미토 나리마스',kr:'현금만 가능합니다.'},
+      {jp:'ICカードも使えます。',ro:'IC카-도모 츠카에마스',kr:'교통카드도 사용 가능합니다.'},
+    ]},
+    {jp:'袋をもらえますか？',ro:'후쿠로오 모라에마스까',kr:'봉지를 받을 수 있나요?',replies:[
+      {jp:'有料になりますがよろしいですか？',ro:'유-료-니 나리마스가 요로시이데스까',kr:'유료인데 괜찮으세요?'},
+      {jp:'どうぞ。',ro:'도-조',kr:'여기 있습니다.'},
+      {jp:'エコバッグはお持ちですか？',ro:'에코밧구와 오모치데스까',kr:'에코백은 갖고 계세요?'},
+    ]},
+    {jp:'これにします！',ro:'코레니 시마스',kr:'이것으로 할게요!',replies:[
+      {jp:'ありがとうございます！',ro:'아리가토- 고자이마스',kr:'감사합니다!'},
+      {jp:'では、お会計はこちらで。',ro:'데와, 오카이케-와 코치라데',kr:'그러면 계산은 이쪽에서요.'},
+      {jp:'ギフト包装もできますよ。',ro:'기후토 호-소-모 데키마스요',kr:'선물 포장도 가능해요.'},
+    ]},
+    {jp:'まけてください。',ro:'마케테 쿠다사이',kr:'깎아주세요.',replies:[
+      {jp:'申し訳ありませんが、定価販売です。',ro:'모-시와케 아리마셍가, 테-카 한바이데스',kr:'죄송하지만 정가 판매입니다.'},
+      {jp:'これ以上は無理です…',ro:'코레이죠-와 무리데스',kr:'이 이상은 어렵습니다…'},
+      {jp:'少しだけ…どうぞ。',ro:'스코시다케… 도-조',kr:'조금만… 여기요.'},
+    ]},
+    {jp:'免税はできますか？',ro:'멘제-와 데키마스까',kr:'면세 가능한가요?',replies:[
+      {jp:'5000円以上のお買い上げで免税になります。',ro:'고센엔이죠-노 오카이아게데 멘제-니 나리마스',kr:'5000엔 이상 구매 시 면세가 됩니다.'},
+      {jp:'パスポートをお持ちください。',ro:'파스포-토오 오모치 쿠다사이',kr:'여권을 지참해주세요.'},
+      {jp:'当店は免税対象外です。',ro:'토-텐와 멘제- 타이쇼-가이데스',kr:'이 가게는 면세 대상이 아닙니다.'},
+    ]},
+  ]},
+  {id:'transport',icon:'🚆',name:'교통',yt:{url:'https://www.youtube.com/watch?v=RC5H0eF0ERs',title:'일본 여행 필수 표현',sub:'한국어 해설 · 실전 꿀팁'},
+   phrases:[
+    {jp:'〇〇まで一枚ください。',ro:'〇〇마데 이치마이 쿠다사이',kr:'〇〇까지 한 장 주세요.',replies:[
+      {jp:'〇〇円です。',ro:'〇〇엔데스',kr:'〇〇엔입니다.'},
+      {jp:'ICカードをお使いですか？',ro:'IC카-도오 오츠카이데스까',kr:'교통카드 쓰시나요?'},
+      {jp:'こちらがチケットです。',ro:'코치라가 치켓토데스',kr:'이것이 티켓입니다.'},
+    ]},
+    {jp:'次の電車は何時ですか？',ro:'츠기노 덴샤와 난지데스까',kr:'다음 전철은 몇 시인가요?',replies:[
+      {jp:'3分後に来ます。',ro:'산분고니 키마스',kr:'3분 후에 옵니다.'},
+      {jp:'次は10時15分です。',ro:'츠기와 쥬-지 쥬-고훈데스',kr:'다음은 10시 15분입니다.'},
+      {jp:'電光掲示板をご確認ください。',ro:'덴코-케-지반오 고카쿠닌 쿠다사이',kr:'전광판을 확인해주세요.'},
+    ]},
+    {jp:'〇〇はどこで乗り換えますか？',ro:'〇〇와 도코데 노리카에마스까',kr:'어디서 환승하나요?',replies:[
+      {jp:'新宿で乗り換えてください。',ro:'신쥬쿠데 노리카에테 쿠다사이',kr:'신주쿠에서 환승하세요.'},
+      {jp:'次の駅です。',ro:'츠기노 에키데스',kr:'다음 역입니다.'},
+      {jp:'この電車で直通です。',ro:'코노 덴샤데 쵸쿠츠-데스',kr:'이 전철로 직통입니다.'},
+    ]},
+    {jp:'ここで止めてください。',ro:'코코데 토메테 쿠다사이',kr:'여기서 세워주세요.',replies:[
+      {jp:'はい、わかりました。',ro:'하이, 와카리마시타',kr:'네, 알겠습니다.'},
+      {jp:'少し先でもよろしいですか？',ro:'스코시 사키데모 요로시이데스까',kr:'조금 더 앞에서 괜찮으세요?'},
+      {jp:'料金は〇〇円です。',ro:'료-킨와 〇〇엔데스',kr:'요금은 〇〇엔입니다.'},
+    ]},
+    {jp:'道に迷いました。',ro:'미치니 마요이마시타',kr:'길을 잃었습니다.',replies:[
+      {jp:'どちらへ行きたいですか？',ro:'도치라에 이키타이데스까',kr:'어디로 가고 싶으세요?'},
+      {jp:'一緒に地図を見ましょう。',ro:'잇쇼니 치즈오 미마쇼-',kr:'같이 지도를 봐요.'},
+      {jp:'GoogleMapsで調べましょう。',ro:'구-구루맙푸스데 시라베마쇼-',kr:'구글 맵으로 찾아봐요.'},
+    ]},
+    {jp:'〇〇駅はどこですか？',ro:'〇〇에키와 도코데스까',kr:'〇〇역은 어디인가요?',replies:[
+      {jp:'あの信号を右に曲がってください。',ro:'아노 신고-오 미기니 마갓테 쿠다사이',kr:'저 신호에서 오른쪽으로 꺾으세요.'},
+      {jp:'歩いて5分ほどです。',ro:'아루이테 고훈 호도데스',kr:'걸어서 5분 정도입니다.'},
+      {jp:'この道をまっすぐです。',ro:'코노 미치오 맛스구데스',kr:'이 길로 쭉 가시면 됩니다.'},
+    ]},
+  ]},
+  {id:'tourist',icon:'⛩️',name:'관광',yt:{url:'https://www.youtube.com/watch?v=Lnudm5taHf8',title:'에리나 · 여행 일본어',sub:'한국어+일본어 · 현지 표현'},
+   phrases:[
+    {jp:'写真を撮ってもいいですか？',ro:'샤신오 톳테모 이이데스까',kr:'사진을 찍어도 되나요?',replies:[
+      {jp:'はい、どうぞ！',ro:'하이, 도-조',kr:'네, 찍으세요!'},
+      {jp:'申し訳ありませんが、ここは撮影禁止です。',ro:'모-시와케 아리마셍가, 코코와 사츠에-킨시데스',kr:'죄송하지만 여기는 촬영 금지입니다.'},
+      {jp:'フラッシュはご遠慮ください。',ro:'후랏슈와 고엔료 쿠다사이',kr:'플래시는 삼가주세요.'},
+    ]},
+    {jp:'一緒に写真を撮ってください。',ro:'잇쇼니 샤신오 톳테 쿠다사이',kr:'같이 사진 찍어주세요.',replies:[
+      {jp:'もちろん！どのボタンを押せばいいですか？',ro:'모치론! 도노 보탄오 오세바 이이데스까',kr:'물론이요! 어떤 버튼 누르면 되나요?'},
+      {jp:'はい、笑ってください！',ro:'하이, 왓테 쿠다사이',kr:'자, 웃어주세요!'},
+      {jp:'いい写真が撮れましたよ！',ro:'이이 샤신가 토레마시타요',kr:'좋은 사진 찍혔어요!'},
+    ]},
+    {jp:'入場料はいくらですか？',ro:'뉴-죠-료-와 이쿠라데스까',kr:'입장료는 얼마인가요?',replies:[
+      {jp:'大人1000円、子供500円です。',ro:'오토나 센엔, 코도모 고햐쿠엔데스',kr:'어른 1000엔, 어린이 500엔입니다.'},
+      {jp:'入場無料です。',ro:'뉴-죠- 무료-데스',kr:'입장 무료입니다.'},
+      {jp:'外国人割引があります。',ro:'가이코쿠진 와리비키가 아리마스',kr:'외국인 할인이 있습니다.'},
+    ]},
+    {jp:'何時に閉まりますか？',ro:'난지니 시마리마스까',kr:'몇 시에 닫나요?',replies:[
+      {jp:'18時に閉館します。',ro:'쥬-하치지니 헤이칸시마스',kr:'18시에 닫습니다.'},
+      {jp:'今日は17時半です。',ro:'쿄-와 쥬-나나지한데스',kr:'오늘은 17시 30분입니다.'},
+      {jp:'月曜日は休館日です。',ro:'게츠요-비와 큐-칸비데스',kr:'월요일은 휴관일입니다.'},
+    ]},
+    {jp:'トイレはどこですか？',ro:'토이레와 도코데스까',kr:'화장실은 어디인가요?',replies:[
+      {jp:'あちらです。',ro:'아치라데스',kr:'저쪽입니다.'},
+      {jp:'エレベーターの隣にあります。',ro:'에레베-타-노 토나리니 아리마스',kr:'엘리베이터 옆에 있습니다.'},
+      {jp:'地下1階にあります。',ro:'치카 잇카이니 아리마스',kr:'지하 1층에 있습니다.'},
+    ]},
+    {jp:'すごい！きれいですね。',ro:'스고이! 키레이데스네',kr:'대단해요! 예쁘네요.',replies:[
+      {jp:'ありがとうございます！',ro:'아리가토- 고자이마스',kr:'감사합니다!'},
+      {jp:'そうでしょう！人気スポットです。',ro:'소-데쇼-! 닌키 스폿토데스',kr:'그렇죠! 인기 명소입니다.'},
+      {jp:'ぜひまた来てください。',ro:'제히 마타 키테 쿠다사이',kr:'꼭 다시 오세요.'},
+    ]},
+  ]},
+  {id:'konbini',icon:'🏪',name:'편의점',yt:{url:'https://www.youtube.com/results?search_query=편의점+일본어+여행회화',title:'편의점 일본어 표현',sub:'유튜브에서 검색하기'},
+   phrases:[
+    {jp:'温めてください。',ro:'아타타메테 쿠다사이',kr:'데워주세요.',replies:[
+      {jp:'少々お待ちください。',ro:'쇼-쇼- 오마치 쿠다사이',kr:'잠시만 기다려주세요.'},
+      {jp:'500Wで1分でよろしいですか？',ro:'고햐쿠왓토데 잇푼데 요로시이데스까',kr:'500W로 1분이면 될까요?'},
+      {jp:'どうぞ。',ro:'도-조',kr:'여기 있습니다.'},
+    ]},
+    {jp:'レジ袋をください。',ro:'레지부쿠로오 쿠다사이',kr:'봉투를 주세요.',replies:[
+      {jp:'3円になります。',ro:'산엔니 나리마스',kr:'3엔입니다.'},
+      {jp:'どうぞ。',ro:'도-조',kr:'여기 있습니다.'},
+      {jp:'何枚必要ですか？',ro:'난마이 히츠요-데스까',kr:'몇 장 필요하세요?'},
+    ]},
+    {jp:'お箸はいりますか？',ro:'오하시와 이리마스까',kr:'젓가락 필요하세요?',replies:[
+      {jp:'はい、ください。',ro:'하이, 쿠다사이',kr:'네, 주세요.'},
+      {jp:'いいえ、大丈夫です。',ro:'이이에, 다이죠-부데스',kr:'아니요, 괜찮아요.'},
+      {jp:'二膳入れておきます。',ro:'니젠 이레테 오키마스',kr:'두 개 넣어드릴게요.'},
+    ]},
+    {jp:'ATMはどこですか？',ro:'ATM와 도코데스까',kr:'ATM은 어디에 있나요?',replies:[
+      {jp:'入口の横にあります。',ro:'이리구치노 요코니 아리마스',kr:'입구 옆에 있어요.'},
+      {jp:'奥にございます。',ro:'오쿠니 고자이마스',kr:'안쪽에 있어요.'},
+      {jp:'申し訳ありません、当店にはATMがありません。',ro:'모-시와케 아리마셍, 토-텐니와 ATM가 아리마셍',kr:'죄송합니다, 이 가게엔 ATM이 없어요.'},
+    ]},
+    {jp:'コピー機を使いたいです。',ro:'코피-키오 츠카이타이데스',kr:'복사기를 쓰고 싶어요.',replies:[
+      {jp:'あちらにあります。',ro:'아치라니 아리마스',kr:'저쪽에 있어요.'},
+      {jp:'使い方をご説明します。',ro:'츠카이카타오 고세츠메-시마스',kr:'사용법을 설명해드릴게요.'},
+      {jp:'1枚10円です。',ro:'이치마이 쥬-엔데스',kr:'한 장에 10엔입니다.'},
+    ]},
+    {jp:'ポイントカードはありません。',ro:'포인토 카-도와 아리마셍',kr:'포인트 카드 없어요.',replies:[
+      {jp:'かしこまりました。',ro:'카시코마리마시타',kr:'알겠습니다.'},
+      {jp:'今日から作れますよ！',ro:'쿄-카라 츠쿠레마스요',kr:'오늘부터 만들 수 있어요!'},
+      {jp:'大丈夫ですよ。',ro:'다이죠-부데스요',kr:'괜찮습니다.'},
+    ]},
+    {jp:'お釣りが違います。',ro:'오츠리가 치가이마스',kr:'거스름돈이 틀려요.',replies:[
+      {jp:'大変申し訳ありません！',ro:'타이헨 모-시와케 아리마셍',kr:'정말 죄송합니다!'},
+      {jp:'確認いたします。',ro:'카쿠닌 이타시마스',kr:'확인하겠습니다.'},
+      {jp:'レシートをお持ちですか？',ro:'레시-토오 오모치데스까',kr:'영수증 갖고 계세요?'},
+    ]},
+    {jp:'トイレはありますか？',ro:'토이레와 아리마스까',kr:'화장실이 있나요?',replies:[
+      {jp:'お客様専用のトイレはございません。',ro:'오캬쿠사마 센요-노 토이레와 고자이마셍',kr:'고객용 화장실은 없습니다.'},
+      {jp:'奥にございます。',ro:'오쿠니 고자이마스',kr:'안쪽에 있어요.'},
+      {jp:'近くの公衆トイレをご利用ください。',ro:'치카쿠노 코-슈-토이레오 고리요- 쿠다사이',kr:'근처 공중화장실을 이용해주세요.'},
+    ]},
+  ]},
+  {id:'yakkyoku',icon:'💊',name:'병원·약국',yt:{url:'https://www.youtube.com/results?search_query=약국+병원+일본어+여행회화',title:'병원·약국 일본어 표현',sub:'유튜브에서 검색하기'},
+   phrases:[
+    {jp:'頭が痛いです。',ro:'아타마가 이타이데스',kr:'머리가 아파요.',replies:[
+      {jp:'いつからですか？',ro:'이츠카라데스까',kr:'언제부터인가요?'},
+      {jp:'熱はありますか？',ro:'네츠와 아리마스까',kr:'열은 있나요?'},
+      {jp:'こちらの鎮痛剤をどうぞ。',ro:'코치라노 친츠-자이오 도-조',kr:'이 진통제를 드세요.'},
+    ]},
+    {jp:'お腹が痛いです。',ro:'오나카가 이타이데스',kr:'배가 아파요.',replies:[
+      {jp:'下痢はありますか？',ro:'게리와 아리마스까',kr:'설사는 있나요?'},
+      {jp:'食べ過ぎかもしれません。',ro:'타베스기 카모시레마셍',kr:'과식한 것 같네요.'},
+      {jp:'胃腸薬をご用意します。',ro:'이쵸-야쿠오 고요-이시마스',kr:'소화제를 준비해드릴게요.'},
+    ]},
+    {jp:'熱があります。',ro:'네츠가 아리마스',kr:'열이 있어요.',replies:[
+      {jp:'何度ありますか？',ro:'난도 아리마스까',kr:'몇 도나 있나요?'},
+      {jp:'解熱剤をお出しします。',ro:'게네츠자이오 오다시시마스',kr:'해열제를 드릴게요.'},
+      {jp:'安静にしてください。',ro:'안세이니 시테 쿠다사이',kr:'안정을 취하세요.'},
+    ]},
+    {jp:'気分が悪いです。',ro:'키분가 와루이데스',kr:'속이 안 좋아요.',replies:[
+      {jp:'どのくらい続いていますか？',ro:'도노쿠라이 츠즈이테이마스까',kr:'얼마나 계속됐나요?'},
+      {jp:'横になりますか？',ro:'요코니 나리마스까',kr:'누우시겠어요?'},
+      {jp:'水分を取ってください。',ro:'스이분오 톳테 쿠다사이',kr:'수분을 섭취하세요.'},
+    ]},
+    {jp:'風邪薬はありますか？',ro:'카제구스리와 아리마스까',kr:'감기약이 있나요?',replies:[
+      {jp:'こちらの棚にあります。',ro:'코치라노 타나니 아리마스',kr:'이 선반에 있습니다.'},
+      {jp:'症状を教えてください。',ro:'쇼-죠-오 오시에테 쿠다사이',kr:'증상을 알려주세요.'},
+      {jp:'総合感冒薬はいかがですか？',ro:'소-고- 캄보-야쿠와 이카가데스까',kr:'종합감기약은 어떠세요?'},
+    ]},
+    {jp:'胃腸薬をください。',ro:'이쵸-야쿠오 쿠다사이',kr:'소화제 주세요.',replies:[
+      {jp:'こちらはいかがですか？',ro:'코치라와 이카가데스까',kr:'이것은 어떠세요?'},
+      {jp:'食前・食後のどちらですか？',ro:'쇼쿠젠·쇼쿠고노 도치라데스까',kr:'식전·식후 어느 쪽인가요?'},
+      {jp:'どうぞ。',ro:'도-조',kr:'여기 있습니다.'},
+    ]},
+    {jp:'救急車を呼んでください。',ro:'큐-큐-샤오 욘데 쿠다사이',kr:'구급차를 불러주세요.',replies:[
+      {jp:'すぐ呼びます！',ro:'스구 요비마스',kr:'바로 부를게요!'},
+      {jp:'どんな症状ですか？',ro:'돈나 쇼-죠-데스까',kr:'어떤 증상인가요?'},
+      {jp:'119番に電話します。',ro:'햐쿠쥬-큐-방니 덴와시마스',kr:'119에 전화할게요.'},
+    ]},
+    {jp:'病院はどこですか？',ro:'뵤-인와 도코데스까',kr:'병원이 어디에 있나요?',replies:[
+      {jp:'近くの病院をご案内します。',ro:'치카쿠노 뵤-인오 고안나이시마스',kr:'근처 병원을 안내해드릴게요.'},
+      {jp:'タクシーで10分です。',ro:'타쿠시-데 쥬-분데스',kr:'택시로 10분이에요.'},
+      {jp:'地図アプリで検索してみてください。',ro:'치즈아프리데 켄사쿠시테 미테 쿠다사이',kr:'지도 앱으로 검색해보세요.'},
+    ]},
+    {jp:'保険はありません。',ro:'호켄와 아리마셍',kr:'보험이 없어요.',replies:[
+      {jp:'自費診療になります。',ro:'지히 신료-니 나리마스',kr:'자비 진료가 됩니다.'},
+      {jp:'了解しました。',ro:'료-카이시마시타',kr:'알겠습니다.'},
+      {jp:'費用は事前にお伝えします。',ro:'히요-와 지젠니 오츠타에시마스',kr:'비용은 사전에 알려드릴게요.'},
+    ]},
+    {jp:'処方箋が必要ですか？',ro:'쇼호-센가 히츠요-데스까',kr:'처방전이 필요한가요?',replies:[
+      {jp:'この薬には処方箋が必要です。',ro:'코노 쿠스리니와 쇼호-센가 히츠요-데스',kr:'이 약은 처방전이 필요합니다.'},
+      {jp:'市販薬ですので不要です。',ro:'시한야쿠데스노데 후요-데스',kr:'시판약이라 필요 없어요.'},
+      {jp:'お医者さんに相談してください。',ro:'오이샤산니 소-단 시테 쿠다사이',kr:'의사에게 상담해주세요.'},
+    ]},
+  ]},
+];
+
+const ALL_PHRASES=TOPICS.flatMap(t=>t.phrases);
+const ALL_HIRA=HIRA.flatMap(r=>r.chars);
+const KEY='jp_v4';
+let ST={me:{hira:[],kata:[],travel:{},mastered:[]},wife:{hira:[],kata:[],travel:{},mastered:[]},streak:{last:'',count:0}};
+try{
+  const s=localStorage.getItem(KEY);
+  if(s){
+    const p=JSON.parse(s);
+    ['me','wife'].forEach(id=>{ST[id]=Object.assign({hira:[],kata:[],travel:{},mastered:[]},p[id]||{});});
+    if(p.streak)ST.streak=Object.assign({last:'',count:0},p.streak);
+  }
+}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(ST));}catch(e){}}
+
+let CU=null,CT=null,QI=0,QA=false,showM=false,QMODE=0;
+let openReplies={};
+function ud(){return ST[CU.id];}
+function tH(uid){return(ST[uid].hira||[]).length;}
+function tK(uid){return(ST[uid].kata||[]).length;}
+function tT(uid){return Object.values(ST[uid].travel||{}).flat().length;}
+function tM(uid){return(ST[uid].mastered||[]).length;}
+
+/* ─── 스트릭 ─── */
+function todayStr(){return new Date().toISOString().slice(0,10);}
+function markToday(){
+  const today=todayStr();
+  if(ST.streak.last===today)return;
+  const yesterday=new Date(new Date().setDate(new Date().getDate()-1)).toISOString().slice(0,10);
+  ST.streak={last:today,count:ST.streak.last===yesterday?ST.streak.count+1:1};
+  save();
+}
+function renderStreak(){
+  const s=ST.streak,today=todayStr();
+  if(!s.count){document.getElementById('streak-bar').innerHTML='';return;}
+  const done=s.last===today;
+  document.getElementById('streak-bar').innerHTML=`<div class="streak-bar">
+    <div class="streak-fire">🔥</div>
+    <div class="streak-info">
+      <div class="streak-num">${s.count}일 연속 학습</div>
+      <div class="streak-lbl">${done?'오늘도 완료! 내일도 이어가요':'오늘 아직 학습 전이에요'}</div>
+    </div>
+    <span class="streak-today ${done?'st-done':'st-notyet'}">${done?'✓ 완료':'미완료'}</span>
+  </div>`;
+}
+
+/* ─── 화면 전환 ─── */
+function goUser(){showSc('sc-user');renderUS();}
+function go(id){
+  showSc(id);
+  if(id==='sc-home')renderHome();
+  else if(id==='sc-hira')renderHira();
+  else if(id==='sc-kata')renderKata();
+  else if(id==='sc-topics')renderTopics();
+  else if(id==='sc-vault')renderVault();
+  else if(id==='sc-search'){
+    document.getElementById('search-input').value='';
+    document.getElementById('search-results').innerHTML='<div class="s-empty">🔍 검색어를 입력하세요<br><br>일본어 · 한국어 · 발음<br>모두 검색 가능해요</div>';
+    setTimeout(()=>document.getElementById('search-input').focus(),150);
+  }
+}
+function showSc(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+
+/* ─── 사용자 선택 ─── */
+function renderUS(){
+  const tot_all=ALL_HIRA.length+ALL_KATA.length+ALL_PHRASES.length;
+  document.getElementById('user-cards').innerHTML=USERS.map(u=>{
+    const tot=tH(u.id)+tK(u.id)+tT(u.id);
+    return`<div class="user-card" onclick="selU('${u.id}')">
+      <div class="u-av ${u.avCls}">${u.icon}</div>
+      <div style="flex:1">
+        <div class="u-name">${u.name}</div>
+        <div class="u-prog">표현 ${tT(u.id)}/${ALL_PHRASES.length} · ⭐외운 것 ${tM(u.id)}개</div>
+        <div class="u-bar"><div class="u-bar-fill ${u.fillCls}" style="width:${Math.round(tot/tot_all*100)}%"></div></div>
+      </div>
+      <span style="color:#ccc;font-size:20px">›</span>
+    </div>`;
+  }).join('');
+}
+function selU(uid){CU=USERS.find(u=>u.id===uid);markToday();go('sc-home');}
+
+/* ─── 홈 ─── */
+function renderHome(){
+  const fc=CU.id==='me'?'fill-me':'fill-wife';
+  document.getElementById('home-title').textContent=CU.icon+' '+CU.name+'의 학습';
+  document.getElementById('nb-hira').className='nb-fill '+fc;
+  document.getElementById('nb-hira').style.width=Math.round(tH(CU.id)/ALL_HIRA.length*100)+'%';
+  document.getElementById('nb-kata').className='nb-fill '+fc;
+  document.getElementById('nb-kata').style.width=Math.round(tK(CU.id)/ALL_KATA.length*100)+'%';
+  document.getElementById('nb-travel').className='nb-fill '+fc;
+  document.getElementById('nb-travel').style.width=Math.round(tT(CU.id)/ALL_PHRASES.length*100)+'%';
+  document.getElementById('travel-sub').textContent=`${tT(CU.id)}/${ALL_PHRASES.length}개 표현 · 상황별`;
+  const mc=tM(CU.id);
+  document.getElementById('vault-nav-sub').textContent=mc>0?`⭐ ${mc}개 저장됨 · 눌러서 복습하기`:'완벽히 외운 표현 모아보기';
+  renderStreak();
+
+  const seed=new Date().getDate();
+  const daily=[0,7,14].map(o=>ALL_PHRASES[(seed+o)%ALL_PHRASES.length]);
+  openReplies={};
+  document.getElementById('daily-box').innerHTML=`
+    <div class="daily-lbl">☀️ 오늘의 표현 3개</div>
+    <div class="daily-items">${daily.map((p,i)=>{
+      const rid='rep-'+i;
+      return`<div class="d-item">
+        <div class="d-top">
+          <div class="d-main"><div class="d-jp">${p.jp}</div><div class="d-ro">${p.ro}</div><div class="d-kr">${p.kr}</div></div>
+          <button class="spk-xs" onclick="spkT('${p.jp.replace(/'/g,"&#39;")}',this)">🔊</button>
+        </div>
+        ${p.replies?`
+        <button class="reply-toggle" id="rt-${rid}" onclick="toggleReply('${rid}')">💬 상대방 예상 답변 보기</button>
+        <div class="replies-box" id="${rid}">
+          <div class="replies-title">상대방이 이렇게 답할 수 있어요</div>
+          ${p.replies.map(r=>`
+            <div class="reply-item">
+              <button class="spk-reply" onclick="spkT('${r.jp.replace(/'/g,"&#39;")}',this)">🔊</button>
+              <div class="reply-bubble">
+                <div class="r-jp">${r.jp}</div><div class="r-ro">${r.ro}</div><div class="r-kr">${r.kr}</div>
+              </div>
+            </div>`).join('')}
+        </div>`:''}
+      </div>`;
+    }).join('')}</div>`;
+
+  const ot=USERS.find(u=>u.id!==CU.id);
+  document.getElementById('other-stat').innerHTML=`<div class="other-row">
+    <div style="font-size:22px">${ot.icon}</div>
+    <div><div style="font-size:14px;font-weight:600">${ot.name}</div>
+    <div style="font-size:12px;color:#888;margin-top:2px">표현 ${tT(ot.id)}/${ALL_PHRASES.length} · ⭐외운 것 ${tM(ot.id)}개</div></div>
+  </div>`;
+}
+function toggleReply(rid){
+  const box=document.getElementById(rid),btn=document.getElementById('rt-'+rid);
+  const isOpen=box.classList.contains('open');
+  box.classList.toggle('open',!isOpen);btn.classList.toggle('open',!isOpen);
+  btn.textContent=isOpen?'💬 상대방 예상 답변 보기':'💬 답변 접기';
+}
+
+/* ─── 검색 ─── */
+function doSearch(q){
+  const res=document.getElementById('search-results');
+  if(!q.trim()){
+    res.innerHTML='<div class="s-empty">🔍 검색어를 입력하세요<br><br>일본어 · 한국어 · 발음<br>모두 검색 가능해요</div>';
+    return;
+  }
+  const lq=q.toLowerCase();
+  const matches=[];
+  TOPICS.forEach(t=>{t.phrases.forEach(p=>{
+    if(p.jp.includes(q)||p.kr.toLowerCase().includes(lq)||p.ro.toLowerCase().includes(lq))
+      matches.push({t,p});
+  });});
+  if(!matches.length){
+    res.innerHTML=`<div class="s-empty">검색 결과가 없어요 🤔<br><br>"${q}"에 해당하는 표현을 찾지 못했어요.</div>`;
+    return;
+  }
+  res.innerHTML=`<div style="font-size:12px;color:#aaa;margin-bottom:10px">${matches.length}개 발견</div>`+
+    matches.map(({t,p})=>`<div class="sr">
+      <div class="sr-info">
+        <div class="sr-topic">${t.icon} ${t.name}</div>
+        <div class="sr-jp">${p.jp}</div>
+        <div class="sr-ro">${p.ro}</div>
+        <div class="sr-kr">${p.kr}</div>
+      </div>
+      <button class="spk-xs" onclick="spkT('${p.jp.replace(/'/g,"&#39;")}',this)">🔊</button>
+    </div>`).join('');
+}
+
+/* ─── 주제 목록 ─── */
+function renderTopics(){
+  document.getElementById('topic-grid').innerHTML=TOPICS.map(t=>{
+    const done=(ud().travel[t.id]||[]).length;
+    const mCount=(ud().mastered||[]).filter(jp=>t.phrases.some(p=>p.jp===jp)).length;
+    const pct=Math.round(done/t.phrases.length*100);
+    return`<div class="tc" onclick="showTopic('${t.id}')">
+      <div class="tc-icon">${t.icon}</div><div class="tc-name">${t.name}</div>
+      <div class="tc-cnt">${done}/${t.phrases.length}${mCount>0?' · ⭐'+mCount:''}</div>
+      <div class="tc-bar"><div class="tc-fill" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('');
+}
+function showTopic(id){CT=TOPICS.find(t=>t.id===id);QI=0;QA=false;showM=false;QMODE=0;
+  document.getElementById('phrase-title').textContent=CT.icon+' '+CT.name;
+  renderPhrase();showSc('sc-phrase');}
+
+/* ─── 표현 목록 ─── */
+function getCurPool(){
+  const masteredList=ud().mastered||[];
+  const active=CT.phrases.filter(p=>!masteredList.includes(p.jp));
+  return active.length>=2?active:CT.phrases;
+}
+function renderPhrase(){
+  const t=CT,done=ud().travel[t.id]||[],masteredList=ud().mastered||[];
+  const active=t.phrases.filter(p=>!masteredList.includes(p.jp));
+  const mastered=t.phrases.filter(p=>masteredList.includes(p.jp));
+  const isSrch=t.yt.url.includes('results');
+  const ytBdg=isSrch?'<span style="font-size:10px;padding:2px 6px;background:#fff8ee;color:#92400e;border-radius:4px;margin-left:4px">검색</span>':'<span style="font-size:10px;padding:2px 6px;background:#f0faf0;color:#2e7d32;border-radius:4px;margin-left:4px">추천</span>';
+  document.getElementById('phrase-lbl').textContent=done.length+'/'+t.phrases.length;
+
+  const activeHTML=active.map(p=>{
+    const jp_safe=p.jp.replace(/'/g,"&#39;");
+    const isL=done.includes(p.jp);
+    return`<div class="pc${isL?' done':''}">
+      <div class="pc-top">
+        <div class="pm"><div class="p-jp">${p.jp}</div><div class="p-ro">${p.ro}</div><div class="p-kr">${p.kr}</div></div>
+        ${isL?'<div class="done-dot"></div>':''}
+        <button class="spk-btn" onclick="spkP('${jp_safe}','${t.id}',this)">🔊</button>
+      </div>
+      <button class="master-btn" onclick="masterPhrase('${jp_safe}')">⭐ 완벽히 외웠어요 — 보관함으로 보내기</button>
+    </div>`;
+  }).join('');
+
+  const masteredHTML=mastered.length>0?`
+    <div class="mastered-section">
+      <div class="mastered-header">
+        <span class="mastered-label">⭐ 외운 표현 ${mastered.length}개</span>
+        <button class="toggle-btn" onclick="toggleM()">${showM?'접기':'펼쳐보기'}</button>
+      </div>
+      ${showM?`<div class="mastered-list">${mastered.map(p=>`
+        <div class="mc-card">
+          <div class="pm"><div class="p-jp">${p.jp}</div><div class="p-ro">${p.ro}</div><div class="p-kr">${p.kr}</div></div>
+          <button class="spk-btn" onclick="spkT('${p.jp.replace(/'/g,"&#39;")}',this)">🔊</button>
+        </div>`).join('')}</div>`:''}
+    </div>`:'';
+
+  const pool=getCurPool();
+  const qi=Math.min(QI,pool.length-1);
+  document.getElementById('phrase-content').innerHTML=`
+    <a class="yt-btn" href="${t.yt.url}" target="_blank" rel="noopener">
+      <div class="yt-logo"><svg viewBox="0 0 24 24"><path d="M21.6 7.2a2.7 2.7 0 00-1.9-1.9C18 5 12 5 12 5s-6 0-7.7.3A2.7 2.7 0 002.4 7.2 28 28 0 002 12a28 28 0 00.4 4.8 2.7 2.7 0 001.9 1.9C6 19 12 19 12 19s6 0 7.7-.3a2.7 2.7 0 001.9-1.9A28 28 0 0022 12a28 28 0 00-.4-4.8z"/><polygon points="10,15 15,12 10,9" fill="white"/></svg></div>
+      <div class="yt-info"><div class="yt-t">${t.yt.title}${ytBdg}</div><div class="yt-s">${t.yt.sub}</div></div>
+      <span style="color:#bbb">↗</span>
+    </a>
+    <div class="pl">${activeHTML}</div>
+    ${masteredHTML}
+    ${pool.length>=2?`<div class="qbox" id="qbox">${buildQ(pool,qi)}</div>`:''}`;
+  if(QMODE===1&&pool.length>=2)setTimeout(()=>spkT(pool[qi].jp,null),500);
+}
+function toggleM(){showM=!showM;renderPhrase();}
+function masterPhrase(jp){if(!ud().mastered)ud().mastered=[];if(!ud().mastered.includes(jp)){ud().mastered.push(jp);save();}renderPhrase();}
+function unmaster(jp){ud().mastered=(ud().mastered||[]).filter(x=>x!==jp);save();renderVault();}
+
+/* ─── 퀴즈 (3모드) ─── */
+function buildQ(pool,idx){
+  const p=pool[idx];
+  const jp_safe=p.jp.replace(/'/g,'&#39;');
+  const kr_safe=p.kr.replace(/'/g,'&#39;');
+  const tabs=['📖 뜻 맞추기','🔊 듣기 퀴즈','あ 일본어 맞추기'].map((lbl,i)=>
+    `<button class="qmt${QMODE===i?' active':''}" onclick="setQmode(${i})">${lbl}</button>`
+  ).join('');
+
+  let body='';
+  if(QMODE===0){
+    const opts=shuffle([p.kr,...pool.filter((_,i)=>i!==idx).map(x=>x.kr).slice(0,3)]);
+    body=`<div class="q-lbl">🧠 일본어의 뜻은?</div>
+      <div class="q-q">${p.jp}<div style="font-size:11px;color:#c0392b;margin-top:5px">${p.ro}</div></div>
+      <div class="q-opts">${opts.map(o=>`<button class="qopt" onclick="checkQ(this,'${kr_safe}','${jp_safe}')">${o}</button>`).join('')}</div>`;
+  } else if(QMODE===1){
+    const opts=shuffle([p.kr,...pool.filter((_,i)=>i!==idx).map(x=>x.kr).slice(0,3)]);
+    body=`<div class="q-lbl">🔊 들리는 말이 무슨 뜻인가요?</div>
+      <div class="listen-card" onclick="spkT('${jp_safe}',null)">
+        <div class="listen-icon">🔊</div>
+        <div class="listen-hint">터치해서 다시 듣기</div>
+      </div>
+      <div class="q-opts">${opts.map(o=>`<button class="qopt" onclick="checkQ(this,'${kr_safe}','${jp_safe}')">${o}</button>`).join('')}</div>`;
+  } else {
+    const opts=shuffle([p.jp,...pool.filter((_,i)=>i!==idx).map(x=>x.jp).slice(0,3)]);
+    body=`<div class="q-lbl">あ 한국어에 맞는 일본어를 고르세요</div>
+      <div class="q-q">${p.kr}</div>
+      <div class="q-opts">${opts.map(o=>`<button class="qopt" onclick="checkQ(this,'${jp_safe}','${jp_safe}')" style="font-size:13px">${o}</button>`).join('')}</div>`;
+  }
+  return`<div class="qmode-tabs">${tabs}</div>${body}
+    <div class="q-res" id="qres"></div>
+    <button class="q-next" id="qnext" onclick="nextQ()">다음 문제 →</button>`;
+}
+function setQmode(m){
+  QMODE=m;QA=false;
+  const pool=getCurPool();
+  document.getElementById('qbox').innerHTML=buildQ(pool,QI);
+  if(m===1)setTimeout(()=>spkT(pool[QI].jp,null),400);
+}
+function checkQ(btn,correct,jp){
+  if(QA)return;QA=true;
+  const ok=btn.textContent.trim()===correct;
+  document.querySelectorAll('.qopt').forEach(b=>{b.disabled=true;if(b.textContent.trim()===correct)b.classList.add('correct');});
+  if(!ok)btn.classList.add('wrong');
+  const r=document.getElementById('qres');r.textContent=ok?'정답! 잘 하셨어요 👏':'정답: '+correct;r.style.color=ok?'#2e7d32':'#c62828';
+  document.getElementById('qnext').style.display='inline-block';
+  if(ok){markT(CT.id,jp);setTimeout(()=>renderPhrase(),300);}
+}
+function nextQ(){
+  QA=false;
+  const pool=getCurPool();
+  let n;do{n=Math.floor(Math.random()*pool.length);}while(n===QI&&pool.length>1);QI=n;
+  document.getElementById('qbox').innerHTML=buildQ(pool,QI);
+  if(QMODE===1)setTimeout(()=>spkT(pool[QI].jp,null),400);
+}
+
+/* ─── 보관함 ─── */
+function renderVault(){
+  const mastered=ud().mastered||[];
+  document.getElementById('vault-lbl').textContent=mastered.length+'개';
+  if(!mastered.length){
+    document.getElementById('vault-content').innerHTML=`<div class="vault-empty">아직 보관된 표현이 없어요 🌱<br><br>여행 표현에서 완벽히 외운 문장의<br>"⭐ 완벽히 외웠어요" 버튼을 누르면<br>여기에 저장돼요.</div>`;
+    return;
+  }
+  let html='<div style="padding-top:8px">';
+  TOPICS.forEach(t=>{
+    const items=t.phrases.filter(p=>mastered.includes(p.jp));
+    if(!items.length)return;
+    html+=`<div class="v-sec-lbl">${t.icon} ${t.name} · ${items.length}개</div>`;
+    items.forEach(p=>{
+      const jp_safe=p.jp.replace(/'/g,"&#39;");
+      html+=`<div class="vc">
+        <div class="vc-top">
+          <div class="vc-main"><div class="vc-jp">${p.jp}</div><div class="vc-ro">${p.ro}</div><div class="vc-kr">${p.kr}</div></div>
+          <button class="spk-btn" onclick="spkT('${jp_safe}',this)">🔊</button>
+        </div>
+        <div class="vc-actions">
+          <button class="vc-btn vc-ok" onclick="spkT('${jp_safe}',this)">🔊 발음 다시 확인</button>
+          <button class="vc-btn vc-no" onclick="unmaster('${jp_safe}')">↩ 다시 학습할래요</button>
+        </div>
+      </div>`;
+    });
+  });
+  html+='</div>';
+  document.getElementById('vault-content').innerHTML=html;
+}
+
+/* ─── 히라가나 / 가타카나 ─── */
+function renderHira(){
+  const learned=ud().hira||[];
+  document.getElementById('hira-lbl').textContent=learned.length+'/'+ALL_HIRA.length;
+  document.getElementById('hira-content').innerHTML=`
+    <div style="padding:12px 0 4px;font-size:13px;color:#666;line-height:1.7;padding:12px 16px 4px">글자를 터치하면 발음을 들을 수 있어요.<br>들은 글자는 초록색으로 표시돼요.</div>
+    <div style="padding:0 16px">
+    ${HIRA.map(row=>`<div class="hrow-lbl">${row.row}</div>
+      <div class="hrow">${row.chars.map(ch=>`
+        <div class="hcard${learned.includes(ch.c)?' lh':''}" id="hc-${ch.c}" onclick="spkH('${ch.c}')">
+          <div class="h-c">${ch.c}</div><div class="h-r">${ch.r}</div>
+        </div>`).join('')}</div>`).join('')}
+    <div class="tip-box">💡 외울 필요 없어요. 소리로 먼저 익히면 자연스럽게 눈에 들어와요.</div>
+    </div>`;
+}
+function renderKata(){
+  const learned=ud().kata||[];
+  document.getElementById('kata-lbl').textContent=learned.length+'/'+ALL_KATA.length;
+  document.getElementById('kata-content').innerHTML=`
+    <div class="kintro" style="padding:10px 16px 6px">메뉴판에서 자주 보이는 단어들이에요.<br>대부분 외래어 발음 그대로라 금방 익혀져요.</div>
+    <div style="padding:0 16px">
+    ${KATA_GROUPS.map(g=>`<div class="kg-lbl">${g.label}</div>
+      <div class="kcards">${g.items.map(item=>{
+        const sid='kc-'+[...item.k].map(c=>c.codePointAt(0).toString(16)).join('');
+        return`<div class="kcard${learned.includes(item.k)?' lk':''}" id="${sid}" onclick="spkK('${item.k.replace(/'/g,"&#39;")}')">
+          <div class="k-c">${item.k[0]}</div><div><div class="k-w">${item.k}</div><div class="k-k">${item.kr} · ${item.r}</div></div>
+        </div>`;
+      }).join('')}</div>`).join('')}
+    <div class="tip-box">💡 ビール→beer, コーヒー→coffee — 외래어 그대로라 한번 들으면 바로 알아요.</div>
+    </div>`;
+}
+
+/* ─── 음성 / 학습 기록 ─── */
+function spkT(text,btn){
+  if(!window.speechSynthesis)return;window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);u.lang='ja-JP';u.rate=0.85;
+  document.querySelectorAll('.spk-btn,.spk-xs,.spk-reply').forEach(b=>b.classList.remove('speaking'));
+  if(btn){btn.classList.add('speaking');u.onend=()=>btn.classList.remove('speaking');}
+  window.speechSynthesis.speak(u);
+}
+function spkH(c){
+  if(!window.speechSynthesis)return;window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(c);u.lang='ja-JP';u.rate=0.7;
+  const card=document.getElementById('hc-'+c);if(card){card.style.borderColor='#c0392b';setTimeout(()=>card.style.borderColor='',500);}
+  window.speechSynthesis.speak(u);markH(c);
+}
+function spkK(k){
+  if(!window.speechSynthesis)return;window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(k);u.lang='ja-JP';u.rate=0.8;
+  window.speechSynthesis.speak(u);markKt(k);
+  const sid='kc-'+[...k].map(c=>c.codePointAt(0).toString(16)).join('');
+  const card=document.getElementById(sid);if(card)card.classList.add('lk');
+  document.getElementById('kata-lbl').textContent=(ud().kata||[]).length+'/'+ALL_KATA.length;
+}
+function spkP(text,tid,btn){spkT(text,btn);markT(tid,text);setTimeout(()=>renderPhrase(),400);}
+function markH(c){if(!ud().hira)ud().hira=[];if(!ud().hira.includes(c)){ud().hira.push(c);save();}const card=document.getElementById('hc-'+c);if(card)card.classList.add('lh');document.getElementById('hira-lbl').textContent=(ud().hira||[]).length+'/'+ALL_HIRA.length;}
+function markKt(k){if(!ud().kata)ud().kata=[];if(!ud().kata.includes(k)){ud().kata.push(k);save();}}
+function markT(tid,jp){if(!ud().travel[tid])ud().travel[tid]=[];if(!ud().travel[tid].includes(jp)){ud().travel[tid].push(jp);save();}}
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5);}
+
+renderUS();
+</script>
+</body>
+</html>
