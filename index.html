@@ -1431,15 +1431,21 @@ function renderConv(){
     <div style="display:flex;gap:10px;margin-bottom:16px">
       <div style="font-size:22px;flex-shrink:0">${sc.icon}</div>
       <div class="bubble-npc">
-        <div style="font-size:15px;font-weight:600;margin-bottom:4px">${step.npc}</div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px">
+          <div style="font-size:15px;font-weight:600">${step.npc}</div>
+          <button onclick="spkT('${step.npc.replace(/'/g,"\\'")}');event.stopPropagation()" style="flex-shrink:0;width:32px;height:32px;border-radius:50%;border:1px solid #e0ddd8;background:#fff;cursor:pointer;font-size:16px">🔊</button>
+        </div>
         <div style="font-size:11px;color:#c0392b;margin-bottom:2px">${step.npc_ro}</div>
         <div style="font-size:12px;color:#888">${step.npc_kr}</div>
       </div>
     </div>
     <div id="conv-opts" style="display:flex;flex-direction:column;gap:8px">
-      ${step.opts.map((o,i)=>`<button onclick="selectOpt(${i})" class="sim-opt" data-ok="${o.ok}">
-        <span style="font-weight:600;color:#1a1a1a">${o.text}</span>
-        <span style="font-size:11px;color:#888;display:block;margin-top:2px">${o.kr}</span>
+      ${step.opts.map((o,i)=>`<button onclick="selectOpt(${i})" class="sim-opt" data-ok="${o.ok}" style="display:flex;align-items:center;gap:10px">
+        <div style="flex:1;text-align:left">
+          <span style="font-weight:600;color:#1a1a1a;display:block">${o.text}</span>
+          <span style="font-size:11px;color:#888;display:block;margin-top:2px">${o.kr}</span>
+        </div>
+        <button onclick="spkT('${o.text.replace(/'/g,"\\'")}');event.stopPropagation()" style="flex-shrink:0;width:32px;height:32px;border-radius:50%;border:1px solid #e0ddd8;background:#fff;cursor:pointer;font-size:15px">🔊</button>
       </button>`).join('')}
     </div>
     <div id="conv-fb" style="min-height:36px;margin-top:12px;text-align:center;font-size:13px;font-weight:600"></div>
