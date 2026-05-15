@@ -129,6 +129,51 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans
 .k-w{font-size:13px;font-weight:600;color:#1a1a1a}.k-k{font-size:11px;color:#888;margin-top:2px}
 .tip-box{margin-top:18px;padding:13px 15px;background:#fff8f5;border-left:3px solid #c0392b;font-size:13px;color:#666;line-height:1.7}
 .other-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-top:1px solid #e8e5e0}
+/* ─── 숫자 ─── */
+.num-tabs{display:flex;gap:8px;padding:10px 16px;border-bottom:1px solid #e8e5e0;background:#fff;position:sticky;top:57px;z-index:9}
+.ntab{flex:1;padding:7px 4px;border:1px solid #e0ddd8;border-radius:10px;background:#f9f7f4;cursor:pointer;font-size:12px;color:#888;font-family:inherit;text-align:center}
+.ntab.active{border-color:#c0392b;color:#c0392b;background:#fff8f5;font-weight:600}
+.num-wrap{padding:12px 16px 32px}
+.num-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.ncard{background:#fff;border:1px solid #e8e5e0;border-radius:14px;padding:14px 8px;text-align:center;cursor:pointer}
+.ncard:active{transform:scale(.95)}.ncard.played{border-color:#c0392b;background:#fff8f5}
+.n-num{font-size:18px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.n-jp{font-size:20px;color:#1a1a1a;margin-bottom:2px}
+.n-ro{font-size:11px;color:#c0392b;font-weight:500}
+/* ─── 시뮬레이터 ─── */
+.sim-grid{display:flex;flex-direction:column;gap:10px;padding:12px 16px 32px}
+.sim-card{background:#fff;border:1px solid #e8e5e0;border-radius:16px;padding:18px 14px;cursor:pointer;text-align:center}
+.sim-card:active{background:#f5f3f0}
+.sim-icon{font-size:32px;margin-bottom:8px}
+.sim-name{font-size:14px;font-weight:600;color:#1a1a1a}
+.sim-desc{font-size:11px;color:#888;margin-top:3px}
+.conv-wrap{padding:12px 16px 120px}
+.bubble-label{font-size:11px;color:#aaa;margin-bottom:5px}
+.bubble-body{background:#f9f7f4;border:1px solid #e8e5e0;border-radius:16px 16px 16px 4px;padding:12px 14px;margin-bottom:14px}
+.bj-jp{font-size:15px;font-weight:600;color:#1a1a1a;line-height:1.5}
+.bj-ro{font-size:11px;color:#c0392b;font-weight:500;margin-top:3px}
+.bj-kr{font-size:12px;color:#666;margin-top:2px}
+.conv-opts-lbl{font-size:12px;font-weight:600;color:#888;margin:16px 0 8px}
+.conv-opts{display:flex;flex-direction:column;gap:7px}
+.copt{padding:11px 14px;border:1px solid #e0ddd8;border-radius:14px;background:#fff;cursor:pointer;text-align:left;font-family:inherit;width:100%}
+.copt-jp{font-size:14px;font-weight:600;color:#1a1a1a}
+.copt-kr{font-size:11px;color:#888;margin-top:2px}
+.copt.correct{border-color:#4caf50;background:#f0faf0}.copt.correct .copt-jp{color:#2e7d32}
+.copt.wrong{border-color:#f44336;background:#fff0ee}.copt.wrong .copt-jp{color:#c62828}
+.conv-feedback{padding:10px 14px;border-radius:12px;font-size:13px;margin-top:10px;line-height:1.5}
+.fb-ok{background:#f0faf0;color:#2e7d32;border:1px solid #c8e6c9}
+.fb-ng{background:#fff0ee;color:#c62828;border:1px solid #ffcdd2}
+.conv-next{margin-top:12px;width:100%;padding:12px;border:none;border-radius:14px;background:#c0392b;color:#fff;font-size:14px;font-family:inherit;font-weight:600;cursor:pointer}
+.conv-result{padding:40px 16px;text-align:center}
+.conv-score{font-size:52px;font-weight:700;color:#c0392b;line-height:1}
+.bubble-npc{background:#f9f7f4;border:1px solid #e8e5e0;border-radius:16px 16px 16px 4px;padding:12px 14px;flex:1}
+.sim-opt{width:100%;padding:12px 14px;border:1.5px solid #e0ddd8;border-radius:14px;background:#fff;cursor:pointer;text-align:left;font-family:inherit;margin-bottom:0}
+.conv-score-lbl{font-size:15px;color:#666;margin:8px 0 28px}
+.conv-retry{padding:12px 28px;border:1.5px solid #c0392b;border-radius:12px;background:none;color:#c0392b;font-size:14px;font-family:inherit;font-weight:600;cursor:pointer;margin-right:8px}
+.conv-home{padding:12px 28px;border:none;border-radius:12px;background:#c0392b;color:#fff;font-size:14px;font-family:inherit;font-weight:600;cursor:pointer}
+.step-bar{display:flex;gap:4px;margin-bottom:16px}
+.step-dot{flex:1;height:4px;border-radius:99px;background:#e8e5e0}
+.step-dot.done{background:#c0392b}.step-dot.cur{background:#f0a0a0}
 /* ─── 스트릭 ─── */
 .streak-bar{display:flex;align-items:center;gap:10px;padding:10px 16px;background:linear-gradient(135deg,#fff8f0,#fff5ee);border-bottom:1px solid #fde8cc}
 .streak-fire{font-size:24px;line-height:1}
@@ -226,6 +271,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans
       <div class="nb-wrap"><div id="nb-travel" class="nb-fill" style="width:0%"></div></div>
       <span style="color:#ccc;font-size:18px">›</span>
     </div>
+    <div class="nav-item" onclick="go('sc-numbers')">
+      <div class="nav-icon">🔢</div>
+      <div class="nav-text"><div class="nav-title">숫자·금액 연습</div><div class="nav-sub">숫자·엔화·시간 읽기</div></div>
+      <span style="color:#ccc;font-size:18px">›</span>
+    </div>
+    <div class="nav-item" onclick="go('sc-sim')">
+      <div class="nav-icon">💬</div>
+      <div class="nav-text"><div class="nav-title">대화 시뮬레이터</div><div class="nav-sub">실전 상황 연습 · 3가지 시나리오</div></div>
+      <span style="color:#ccc;font-size:18px">›</span>
+    </div>
     <div class="nav-item" onclick="go('sc-review')" style="border-color:#fde0d8;background:#fff8f5" id="review-nav">
       <div class="nav-icon">📚</div>
       <div class="nav-text">
@@ -257,6 +312,40 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans
   <div class="search-wrap" id="search-results">
     <div class="s-empty">🔍 검색어를 입력하세요<br><br>일본어 · 한국어 · 발음<br>모두 검색 가능해요</div>
   </div>
+</div>
+
+<!-- 숫자·금액 -->
+<div id="sc-numbers" class="screen">
+  <div class="topbar">
+    <button class="back-btn" onclick="go('sc-home')" aria-label="뒤로">←</button>
+    <span class="topbar-title">🔢 숫자·금액 연습</span>
+  </div>
+  <div class="num-tabs">
+    <button class="ntab active" id="nt0" onclick="setNumTab(0)">숫자 기초</button>
+    <button class="ntab" id="nt1" onclick="setNumTab(1)">💴 금액 퀴즈</button>
+    <button class="ntab" id="nt2" onclick="setNumTab(2)">🕐 시간 읽기</button>
+  </div>
+  <div class="num-wrap" id="num-content"></div>
+</div>
+
+<!-- 대화 시뮬레이터 선택 -->
+<div id="sc-sim" class="screen">
+  <div class="topbar">
+    <button class="back-btn" onclick="go('sc-home')" aria-label="뒤로">←</button>
+    <span class="topbar-title">💬 대화 시뮬레이터</span>
+  </div>
+  <div style="padding:12px 16px 8px;font-size:13px;color:#888">시나리오를 선택하세요</div>
+  <div class="sim-grid" id="sim-grid"></div>
+</div>
+
+<!-- 대화 진행 -->
+<div id="sc-conv" class="screen">
+  <div class="topbar">
+    <button class="back-btn" onclick="go('sc-sim')" aria-label="뒤로">←</button>
+    <span class="topbar-title" id="conv-title"></span>
+    <span class="topbar-right" id="conv-step-lbl"></span>
+  </div>
+  <div class="conv-wrap" id="conv-content"></div>
 </div>
 
 <!-- 스마트 복습 -->
@@ -773,6 +862,8 @@ function go(id){
   else if(id==='sc-kata')renderKata();
   else if(id==='sc-topics')renderTopics();
   else if(id==='sc-vault')renderVault();
+  else if(id==='sc-numbers'){NUM_TAB=0;renderNumbers();}
+  else if(id==='sc-sim')renderSim();
   else if(id==='sc-review')renderReview();
   else if(id==='sc-search'){
     document.getElementById('search-input').value='';
@@ -1113,6 +1204,286 @@ function markH(c){if(!ud().hira)ud().hira=[];if(!ud().hira.includes(c)){ud().hir
 function markKt(k){if(!ud().kata)ud().kata=[];if(!ud().kata.includes(k)){ud().kata.push(k);save();}}
 function markT(tid,jp){if(!ud().travel[tid])ud().travel[tid]=[];if(!ud().travel[tid].includes(jp)){ud().travel[tid].push(jp);save();}}
 function shuffle(a){return a.slice().sort(()=>Math.random()-.5);}
+
+/* ─── 숫자·금액 연습 ─── */
+let NUM_TAB=0,NUM_QI=0,NUM_QA=false;
+const NUMS_BASIC=[
+  {jp:'一',ro:'이치',kr:'1'},
+  {jp:'二',ro:'니',kr:'2'},
+  {jp:'三',ro:'산',kr:'3'},
+  {jp:'四',ro:'시/욘',kr:'4'},
+  {jp:'五',ro:'고',kr:'5'},
+  {jp:'六',ro:'로쿠',kr:'6'},
+  {jp:'七',ro:'시치/나나',kr:'7'},
+  {jp:'八',ro:'하치',kr:'8'},
+  {jp:'九',ro:'큐/쿠',kr:'9'},
+  {jp:'十',ro:'쥬',kr:'10'},
+  {jp:'百',ro:'햐쿠',kr:'100'},
+  {jp:'千',ro:'센',kr:'1,000'},
+  {jp:'万',ro:'만',kr:'10,000'},
+];
+const NUMS_MONEY=[
+  {jp:'百円',ro:'햐쿠엔',kr:'100엔'},
+  {jp:'二百円',ro:'니햐쿠엔',kr:'200엔'},
+  {jp:'三百円',ro:'산뱌쿠엔',kr:'300엔 (변칙)'},
+  {jp:'四百円',ro:'욘햐쿠엔',kr:'400엔'},
+  {jp:'五百円',ro:'고햐쿠엔',kr:'500엔'},
+  {jp:'六百円',ro:'롯뺘쿠엔',kr:'600엔 (변칙)'},
+  {jp:'七百円',ro:'나나햐쿠엔',kr:'700엔'},
+  {jp:'八百円',ro:'핫뺘쿠엔',kr:'800엔 (변칙)'},
+  {jp:'九百円',ro:'큐햐쿠엔',kr:'900엔'},
+  {jp:'千円',ro:'센엔',kr:'1,000엔'},
+  {jp:'二千円',ro:'니센엔',kr:'2,000엔'},
+  {jp:'三千円',ro:'산젠엔',kr:'3,000엔 (변칙)'},
+  {jp:'五千円',ro:'고센엔',kr:'5,000엔'},
+  {jp:'一万円',ro:'이치만엔',kr:'10,000엔'},
+  {jp:'二万円',ro:'니만엔',kr:'20,000엔'},
+  {jp:'三万円',ro:'산만엔',kr:'30,000엔'},
+];
+const NUMS_TIME=[
+  {jp:'一時',ro:'이치지',kr:'1시'},
+  {jp:'二時',ro:'니지',kr:'2시'},
+  {jp:'三時',ro:'산지',kr:'3시'},
+  {jp:'六時',ro:'로쿠지',kr:'6시'},
+  {jp:'十二時',ro:'쥬니지',kr:'12시'},
+  {jp:'一分',ro:'잇뿐',kr:'1분 (변칙)'},
+  {jp:'三分',ro:'산뿐',kr:'3분 (변칙)'},
+  {jp:'五分',ro:'고훈',kr:'5분'},
+  {jp:'十分',ro:'쥿뿐',kr:'10분 (변칙)'},
+  {jp:'十五分',ro:'쥬고훈',kr:'15분'},
+  {jp:'三十分',ro:'산쥽뿐',kr:'30분'},
+  {jp:'四十五分',ro:'욘쥬고훈',kr:'45분'},
+  {jp:'半',ro:'한',kr:'반 (30분)'},
+  {jp:'午前',ro:'고젠',kr:'오전'},
+  {jp:'午後',ro:'고고',kr:'오후'},
+];
+function setNumTab(t){
+  NUM_TAB=t;
+  document.querySelectorAll('.ntab').forEach((b,i)=>b.classList.toggle('active',i===t));
+  renderNumbers();
+}
+function renderNumbers(){
+  const data=[NUMS_BASIC,NUMS_MONEY,NUMS_TIME][NUM_TAB];
+  const titles=['숫자 기초','금액 퀴즈','시간 읽기'];
+  const el=document.getElementById('num-content');
+  if(NUM_TAB===1){
+    const q=data[NUM_QI];
+    const opts=shuffle([...data].filter((_,i)=>i!==NUM_QI).slice(0,3).concat(q)).slice(0,4);
+    el.innerHTML=`<div style="padding:20px 16px">
+      <div style="text-align:center;margin-bottom:24px">
+        <div style="font-size:48px;font-weight:700;color:#c0392b;margin-bottom:8px">${q.jp}</div>
+        <button onclick="spkNum('${q.jp}')" style="background:none;border:1px solid #e0ddd8;border-radius:20px;padding:6px 16px;cursor:pointer;font-size:13px;color:#888">🔊 듣기</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px" id="num-opts">
+        ${opts.map(o=>`<button onclick="checkNumQ('${o.ro}','${q.ro}',this)" style="padding:14px;border:1.5px solid #e0ddd8;border-radius:12px;font-size:14px;background:#fff;cursor:pointer;font-weight:600">${o.kr}</button>`).join('')}
+      </div>
+      <div id="num-fb" style="min-height:40px;text-align:center;font-size:14px;font-weight:600"></div>
+      <div style="text-align:center;margin-top:8px;color:#999;font-size:12px">${NUM_QI+1} / ${data.length}</div>
+    </div>`;
+    return;
+  }
+  el.innerHTML=`<div style="display:flex;flex-direction:column;gap:10px;padding:16px">
+    ${data.map(d=>`<div style="display:flex;align-items:center;gap:12px;padding:14px;background:#fff;border:1px solid #e8e5e0;border-radius:14px">
+      <div style="flex:1">
+        <div style="font-size:18px;font-weight:700;color:#c0392b">${d.jp}</div>
+        <div style="font-size:12px;color:#c0392b;font-weight:500;margin-top:2px">${d.ro}</div>
+        <div style="font-size:13px;color:#666;margin-top:2px">${d.kr}</div>
+      </div>
+      <button onclick="spkNum('${d.jp}')" style="width:38px;height:38px;border-radius:50%;border:1px solid #e0ddd8;background:none;cursor:pointer;font-size:18px;flex-shrink:0">🔊</button>
+    </div>`).join('')}
+  </div>`;
+}
+function spkNum(t){spkT(t);}
+function checkNumQ(sel,ans,btn){
+  if(NUM_QA)return;
+  NUM_QA=true;
+  const ok=sel===ans;
+  document.querySelectorAll('#num-opts button').forEach(b=>{
+    if(b===btn)b.style.background=ok?'#e8f8ef':'#fdecea',b.style.borderColor=ok?'#27ae60':'#e74c3c';
+  });
+  document.getElementById('num-fb').innerHTML=ok?'<span style="color:#27ae60">✓ 정답!</span>':'<span style="color:#e74c3c">✗ 오답 — '+ans+'</span>';
+  setTimeout(nextNumQ,1200);
+}
+function nextNumQ(){
+  const data=NUMS_MONEY;
+  NUM_QI=(NUM_QI+1)%data.length;
+  NUM_QA=false;
+  renderNumbers();
+}
+
+/* ─── 대화 시뮬레이터 ─── */
+let SIM_CUR=null,SIM_STEP=0,SIM_SCORE=0,SIM_ANSWERED=false;
+const SIM_SCENARIOS=[
+  {
+    id:'restaurant',icon:'🍜',title:'식당 주문',sub:'음식을 주문해 보세요',
+    steps:[
+      {npc:'いらっしゃいませ！何名様ですか？',npc_ro:'이랏샤이마세! 난메이사마데스카?',npc_kr:'어서오세요! 몇 분이세요?',
+       opts:[
+         {text:'二人です。',ro:'후타리데스.',kr:'두 명이에요.',ok:true},
+         {text:'一人です。',ro:'히토리데스.',kr:'혼자예요.',ok:false},
+         {text:'三人です。',ro:'산닌데스.',kr:'세 명이에요.',ok:false},
+       ]},
+      {npc:'ご注文はお決まりですか？',npc_ro:'고추몽와 오키마리데스카?',npc_kr:'주문 결정하셨나요?',
+       opts:[
+         {text:'これをください。',ro:'코레오 쿠다사이.',kr:'이것 주세요.',ok:true},
+         {text:'まだです。',ro:'마다데스.',kr:'아직이요.',ok:false},
+         {text:'メニューをください。',ro:'메뉴오 쿠다사이.',kr:'메뉴 주세요.',ok:false},
+       ]},
+      {npc:'お飲み物はいかがですか？',npc_ro:'오노미모노와 이카가데스카?',npc_kr:'음료는 어떠세요?',
+       opts:[
+         {text:'お水をください。',ro:'오미즈오 쿠다사이.',kr:'물 주세요.',ok:true},
+         {text:'いいえ、結構です。',ro:'이이에, 켓코데스.',kr:'아니요, 괜찮습니다.',ok:false},
+         {text:'コーヒーをください。',ro:'코히오 쿠다사이.',kr:'커피 주세요.',ok:false},
+       ]},
+      {npc:'お会計はご一緒でよろしいですか？',npc_ro:'오카이케이와 고잇쇼데 요로시이데스카?',npc_kr:'계산은 같이 하시겠어요?',
+       opts:[
+         {text:'はい、一緒でお願いします。',ro:'하이, 잇쇼데 오네가이시마스.',kr:'네, 같이 부탁드려요.',ok:true},
+         {text:'別々でお願いします。',ro:'베츠베츠데 오네가이시마스.',kr:'따로따로 부탁드려요.',ok:false},
+         {text:'カードで払えますか？',ro:'카도데 하라에마스카?',kr:'카드로 낼 수 있나요?',ok:false},
+       ]},
+      {npc:'ありがとうございました！またどうぞ！',npc_ro:'아리가토 고자이마시타! 마타 도조!',npc_kr:'감사합니다! 또 오세요!',
+       opts:[
+         {text:'ありがとう！また来ます！',ro:'아리가토! 마타 키마스!',kr:'감사해요! 또 올게요!',ok:true},
+         {text:'どうも。',ro:'도모.',kr:'감사해요.',ok:false},
+         {text:'ごちそうさまでした。',ro:'고치소사마데시타.',kr:'잘 먹었습니다.',ok:false},
+       ]},
+    ]
+  },
+  {
+    id:'airport',icon:'✈️',title:'공항 입국',sub:'입국 심사를 통과해 보세요',
+    steps:[
+      {npc:'旅行の目的は何ですか？',npc_ro:'료코노 모쿠테키와 난데스카?',npc_kr:'여행 목적이 무엇인가요?',
+       opts:[
+         {text:'観光です。',ro:'칸코데스.',kr:'관광입니다.',ok:true},
+         {text:'仕事です。',ro:'시고토데스.',kr:'일입니다.',ok:false},
+         {text:'留学です。',ro:'류가쿠데스.',kr:'유학입니다.',ok:false},
+       ]},
+      {npc:'滞在期間はどのくらいですか？',npc_ro:'타이자이 키칸와 도노쿠라이데스카?',npc_kr:'체류 기간은 얼마나 되나요?',
+       opts:[
+         {text:'一週間です。',ro:'잇슈칸데스.',kr:'일주일이에요.',ok:true},
+         {text:'三日間です。',ro:'밋카칸데스.',kr:'3일이에요.',ok:false},
+         {text:'二週間です。',ro:'니슈칸데스.',kr:'2주일이에요.',ok:false},
+       ]},
+      {npc:'どこに泊まりますか？',npc_ro:'도코니 토마리마스카?',npc_kr:'어디에 묵으시나요?',
+       opts:[
+         {text:'東京のホテルです。',ro:'도쿄노 호테루데스.',kr:'도쿄 호텔이에요.',ok:true},
+         {text:'友達の家です。',ro:'토모다치노 이에데스.',kr:'친구 집이에요.',ok:false},
+         {text:'まだ決めていません。',ro:'마다 키메테이마센.',kr:'아직 정하지 않았어요.',ok:false},
+       ]},
+      {npc:'パスポートを見せてください。',npc_ro:'파스포토오 미세테 쿠다사이.',npc_kr:'여권을 보여주세요.',
+       opts:[
+         {text:'はい、どうぞ。',ro:'하이, 도조.',kr:'네, 여기요.',ok:true},
+         {text:'ちょっと待ってください。',ro:'촛토 맛테 쿠다사이.',kr:'잠깐만요.',ok:false},
+         {text:'どこに出しますか？',ro:'도코니 다시마스카?',kr:'어디에 내나요?',ok:false},
+       ]},
+    ]
+  },
+  {
+    id:'hotel',icon:'🏨',title:'호텔 체크인',sub:'호텔에 체크인해 보세요',
+    steps:[
+      {npc:'チェックインですか？',npc_ro:'첵쿠인데스카?',npc_kr:'체크인이신가요?',
+       opts:[
+         {text:'はい、予約した者ですが。',ro:'하이, 요야쿠시타 모노데스가.',kr:'네, 예약한 사람인데요.',ok:true},
+         {text:'チェックアウトです。',ro:'첵쿠아우토데스.',kr:'체크아웃이에요.',ok:false},
+         {text:'部屋を見せてください。',ro:'헤야오 미세테 쿠다사이.',kr:'방을 보여주세요.',ok:false},
+       ]},
+      {npc:'お名前をお願いします。',npc_ro:'오나마에오 오네가이시마스.',npc_kr:'성함을 알려주세요.',
+       opts:[
+         {text:'チェです。',ro:'체데스.',kr:'최입니다.',ok:true},
+         {text:'予約番号はXXXです。',ro:'요야쿠방고와 XXX데스.',kr:'예약번호는 XXX입니다.',ok:false},
+         {text:'パスポートを見せましょうか？',ro:'파스포토오 미세마쇼카?',kr:'여권을 보여드릴까요?',ok:false},
+       ]},
+      {npc:'朝食は付いていますか？',npc_ro:'쵸쇼쿠와 츠이테이마스카?',npc_kr:'조식은 포함되어 있나요?',
+       opts:[
+         {text:'朝食付きのプランです。',ro:'쵸쇼쿠츠키노 프란데스.',kr:'조식 포함 플랜이에요.',ok:true},
+         {text:'いいえ、別途です。',ro:'이이에, 벳토데스.',kr:'아니요, 별도예요.',ok:false},
+         {text:'朝食はどこですか？',ro:'쵸쇼쿠와 도코데스카?',kr:'조식은 어디서 먹나요?',ok:false},
+       ]},
+      {npc:'こちらがお部屋の鍵です。ごゆっくりどうぞ！',npc_ro:'코치라가 오헤야노 카기데스. 고윳쿠리 도조!',npc_kr:'여기 방 열쇠입니다. 편히 쉬세요!',
+       opts:[
+         {text:'ありがとうございます！',ro:'아리가토 고자이마스!',kr:'감사합니다!',ok:true},
+         {text:'WiFiのパスワードは？',ro:'와이파이노 파스와도와?',kr:'와이파이 비밀번호는요?',ok:false},
+         {text:'荷物を預けられますか？',ro:'니모츠오 아즈케라레마스카?',kr:'짐을 맡길 수 있나요?',ok:false},
+       ]},
+    ]
+  },
+];
+function renderSim(){
+  const el=document.getElementById('sim-grid');
+  el.innerHTML=SIM_SCENARIOS.map(s=>`
+    <div onclick="startSim('${s.id}')" style="display:flex;align-items:center;gap:12px;padding:16px;background:#fff;border:1px solid #e8e5e0;border-radius:16px;cursor:pointer">
+      <div style="font-size:32px;width:48px;text-align:center">${s.icon}</div>
+      <div><div style="font-size:15px;font-weight:600;color:#1a1a1a">${s.title}</div><div style="font-size:12px;color:#888;margin-top:3px">${s.sub}</div><div style="font-size:11px;color:#c0392b;margin-top:4px">${s.steps.length}단계 대화</div></div>
+    </div>`).join('');
+}
+function startSim(id){
+  SIM_CUR=SIM_SCENARIOS.find(s=>s.id===id);
+  SIM_STEP=0;SIM_SCORE=0;SIM_ANSWERED=false;
+  go('sc-conv');
+  renderConv();
+}
+function renderConv(){
+  const sc=SIM_CUR,step=sc.steps[SIM_STEP];
+  document.getElementById('conv-title').textContent=sc.icon+' '+sc.title;
+  document.getElementById('conv-step-lbl').textContent=(SIM_STEP+1)+'/'+sc.steps.length;
+  const chat=document.getElementById('conv-content');
+  chat.innerHTML=`
+    <div style="display:flex;gap:10px;margin-bottom:16px">
+      <div style="font-size:22px;flex-shrink:0">${sc.icon}</div>
+      <div class="bubble-npc">
+        <div style="font-size:15px;font-weight:600;margin-bottom:4px">${step.npc}</div>
+        <div style="font-size:11px;color:#c0392b;margin-bottom:2px">${step.npc_ro}</div>
+        <div style="font-size:12px;color:#888">${step.npc_kr}</div>
+      </div>
+    </div>
+    <div id="conv-opts" style="display:flex;flex-direction:column;gap:8px">
+      ${step.opts.map((o,i)=>`<button onclick="selectOpt(${i})" class="sim-opt" data-ok="${o.ok}">
+        <span style="font-weight:600;color:#1a1a1a">${o.text}</span>
+        <span style="font-size:11px;color:#888;display:block;margin-top:2px">${o.kr}</span>
+      </button>`).join('')}
+    </div>
+    <div id="conv-fb" style="min-height:36px;margin-top:12px;text-align:center;font-size:13px;font-weight:600"></div>
+  `;
+}
+function selectOpt(i){
+  if(SIM_ANSWERED)return;
+  SIM_ANSWERED=true;
+  const step=SIM_CUR.steps[SIM_STEP];
+  const opt=step.opts[i];
+  const ok=opt.ok;
+  if(ok)SIM_SCORE++;
+  document.querySelectorAll('.sim-opt').forEach((b,idx)=>{
+    const isOk=step.opts[idx].ok;
+    if(isOk)b.style.background='#e8f8ef',b.style.borderColor='#27ae60';
+    if(idx===i&&!ok)b.style.background='#fdecea',b.style.borderColor='#e74c3c';
+  });
+  document.getElementById('conv-fb').innerHTML=ok
+    ?'<span style="color:#27ae60">✓ 좋아요! 다음으로 →</span>'
+    :`<span style="color:#e74c3c">✗ 정답: ${opt.ro}</span>`;
+  setTimeout(nextSimStep,1400);
+}
+function nextSimStep(){
+  SIM_ANSWERED=false;
+  SIM_STEP++;
+  if(SIM_STEP>=SIM_CUR.steps.length){renderConvResult();return;}
+  renderConv();
+}
+function renderConvResult(){
+  const total=SIM_CUR.steps.length;
+  const pct=Math.round(SIM_SCORE/total*100);
+  const emoji=pct===100?'🎉':pct>=60?'👍':'💪';
+  document.getElementById('conv-content').innerHTML=`
+    <div style="text-align:center;padding:32px 16px">
+      <div style="font-size:56px;margin-bottom:12px">${emoji}</div>
+      <div style="font-size:22px;font-weight:700;color:#1a1a1a;margin-bottom:6px">${SIM_SCORE}/${total} 정답</div>
+      <div style="font-size:14px;color:#888;margin-bottom:24px">정확도 ${pct}%</div>
+      <div style="display:flex;gap:10px;justify-content:center">
+        <button onclick="startSim(SIM_CUR.id)" style="padding:12px 20px;background:#c0392b;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer">다시 하기</button>
+        <button onclick="go('sc-sim')" style="padding:12px 20px;background:#f5f3f0;color:#1a1a1a;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer">다른 시나리오</button>
+      </div>
+    </div>`;
+  document.getElementById('conv-step-lbl').textContent='완료!';
+}
 
 /* ─── 발음 평가 ─── */
 function levenshtein(a,b){
