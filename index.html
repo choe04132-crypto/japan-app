@@ -954,7 +954,7 @@ function checkQ(btn,correct,jp){
   if(!ok)btn.classList.add('wrong');
   const r=document.getElementById('qres');r.textContent=ok?'정답! 잘 하셨어요 👏':'정답: '+correct;r.style.color=ok?'#2e7d32':'#c62828';
   document.getElementById('qnext').style.display='inline-block';
-  if(ok){markT(CT.id,jp);setTimeout(()=>renderPhrase(),300);}
+  if(ok) markT(CT.id,jp);
 }
 function nextQ(){
   QA=false;
