@@ -2680,14 +2680,127 @@ if('serviceWorker' in navigator){
   });
 }
 
+/* ─── 단어장 단어 목록 (초급 100개) ─── */
+const VOCAB_WORDS=[
+  // 인사 (set 0)
+  {jp:'こんにちは',ro:'곤니치와',kr:'안녕하세요 (낮)',cat:'인사'},
+  {jp:'おはよう',ro:'오하요-',kr:'좋은 아침',cat:'인사'},
+  {jp:'こんばんは',ro:'곤방와',kr:'안녕하세요 (저녁)',cat:'인사'},
+  {jp:'ありがとう',ro:'아리가토-',kr:'감사해요',cat:'인사'},
+  {jp:'すみません',ro:'스미마셍',kr:'저기요 / 실례해요',cat:'인사'},
+  {jp:'ごめんなさい',ro:'고멘나사이',kr:'죄송해요',cat:'인사'},
+  {jp:'はい',ro:'하이',kr:'네',cat:'인사'},
+  {jp:'いいえ',ro:'이이에',kr:'아니요',cat:'인사'},
+  {jp:'さようなら',ro:'사요-나라',kr:'안녕히 가세요',cat:'인사'},
+  {jp:'またね',ro:'마타네',kr:'또 봐요',cat:'인사'},
+  // 기본 표현 (set 1)
+  {jp:'おねがいします',ro:'오네가이시마스',kr:'부탁합니다',cat:'기본 표현'},
+  {jp:'ください',ro:'쿠다사이',kr:'주세요',cat:'기본 표현'},
+  {jp:'わかりました',ro:'와카리마시타',kr:'알겠어요',cat:'기본 표현'},
+  {jp:'わかりません',ro:'와카리마셍',kr:'모르겠어요',cat:'기본 표현'},
+  {jp:'だいじょうぶ',ro:'다이죠-부',kr:'괜찮아요',cat:'기본 표현'},
+  {jp:'ちょっとまって',ro:'쵯토맛테',kr:'잠깐만요',cat:'기본 표현'},
+  {jp:'もういちど',ro:'모-이치도',kr:'다시 한번',cat:'기본 표현'},
+  {jp:'ゆっくり',ro:'윳쿠리',kr:'천천히',cat:'기본 표현'},
+  {jp:'どうぞ',ro:'도-조',kr:'여기요 / 어서요',cat:'기본 표현'},
+  {jp:'いただきます',ro:'이타다키마스',kr:'잘 먹겠습니다',cat:'기본 표현'},
+  // 음식 (set 2)
+  {jp:'みず',ro:'미즈',kr:'물',cat:'음식'},
+  {jp:'おちゃ',ro:'오챠',kr:'차',cat:'음식'},
+  {jp:'コーヒー',ro:'코-히-',kr:'커피',cat:'음식'},
+  {jp:'ごはん',ro:'고항',kr:'밥',cat:'음식'},
+  {jp:'パン',ro:'팡',kr:'빵',cat:'음식'},
+  {jp:'にく',ro:'니쿠',kr:'고기',cat:'음식'},
+  {jp:'さかな',ro:'사카나',kr:'생선',cat:'음식'},
+  {jp:'やさい',ro:'야사이',kr:'채소',cat:'음식'},
+  {jp:'たまご',ro:'타마고',kr:'달걀',cat:'음식'},
+  {jp:'おいしい',ro:'오이시이',kr:'맛있어요',cat:'음식'},
+  // 장소 (set 3)
+  {jp:'えき',ro:'에키',kr:'역',cat:'장소'},
+  {jp:'トイレ',ro:'토이레',kr:'화장실',cat:'장소'},
+  {jp:'ホテル',ro:'호테루',kr:'호텔',cat:'장소'},
+  {jp:'くうこう',ro:'쿠-코-',kr:'공항',cat:'장소'},
+  {jp:'コンビニ',ro:'콘비니',kr:'편의점',cat:'장소'},
+  {jp:'びょういん',ro:'뵤-잉',kr:'병원',cat:'장소'},
+  {jp:'レストラン',ro:'레스토랑',kr:'레스토랑',cat:'장소'},
+  {jp:'スーパー',ro:'스-파-',kr:'슈퍼마켓',cat:'장소'},
+  {jp:'ぎんこう',ro:'깅코-',kr:'은행',cat:'장소'},
+  {jp:'ゆうびんきょく',ro:'유-빙쿄쿠',kr:'우체국',cat:'장소'},
+  // 교통 (set 4)
+  {jp:'でんしゃ',ro:'덴샤',kr:'전철',cat:'교통'},
+  {jp:'バス',ro:'바스',kr:'버스',cat:'교통'},
+  {jp:'タクシー',ro:'타쿠시-',kr:'택시',cat:'교통'},
+  {jp:'ひこうき',ro:'히코-키',kr:'비행기',cat:'교통'},
+  {jp:'しんかんせん',ro:'싱칸셍',kr:'신칸센',cat:'교통'},
+  {jp:'きっぷ',ro:'킷푸',kr:'표 / 티켓',cat:'교통'},
+  {jp:'でぐち',ro:'데구치',kr:'출구',cat:'교통'},
+  {jp:'いりぐち',ro:'이리구치',kr:'입구',cat:'교통'},
+  {jp:'みぎ',ro:'미기',kr:'오른쪽',cat:'교통'},
+  {jp:'ひだり',ro:'히다리',kr:'왼쪽',cat:'교통'},
+  // 숫자 (set 5)
+  {jp:'いち',ro:'이치',kr:'1',cat:'숫자'},
+  {jp:'に',ro:'니',kr:'2',cat:'숫자'},
+  {jp:'さん',ro:'산',kr:'3',cat:'숫자'},
+  {jp:'し・よん',ro:'시/욘',kr:'4',cat:'숫자',tts:'し'},
+  {jp:'ご',ro:'고',kr:'5',cat:'숫자'},
+  {jp:'ろく',ro:'로쿠',kr:'6',cat:'숫자'},
+  {jp:'なな',ro:'나나',kr:'7',cat:'숫자'},
+  {jp:'はち',ro:'하치',kr:'8',cat:'숫자'},
+  {jp:'きゅう',ro:'큐-',kr:'9',cat:'숫자'},
+  {jp:'じゅう',ro:'쥬-',kr:'10',cat:'숫자'},
+  // 형용사 (set 6)
+  {jp:'おおきい',ro:'오-키이',kr:'커요',cat:'형용사'},
+  {jp:'ちいさい',ro:'치이사이',kr:'작아요',cat:'형용사'},
+  {jp:'たかい',ro:'타카이',kr:'비싸요',cat:'형용사'},
+  {jp:'やすい',ro:'야스이',kr:'싸요',cat:'형용사'},
+  {jp:'あつい',ro:'아츠이',kr:'뜨거워요',cat:'형용사'},
+  {jp:'つめたい',ro:'츠메타이',kr:'차가워요',cat:'형용사'},
+  {jp:'からい',ro:'카라이',kr:'매워요',cat:'형용사'},
+  {jp:'あまい',ro:'아마이',kr:'달아요',cat:'형용사'},
+  {jp:'たのしい',ro:'타노시이',kr:'즐거워요',cat:'형용사'},
+  {jp:'きれい',ro:'키레이',kr:'예뻐요',cat:'형용사'},
+  // 시간 (set 7)
+  {jp:'きょう',ro:'쿄-',kr:'오늘',cat:'시간'},
+  {jp:'あした',ro:'아시타',kr:'내일',cat:'시간'},
+  {jp:'きのう',ro:'키노-',kr:'어제',cat:'시간'},
+  {jp:'いま',ro:'이마',kr:'지금',cat:'시간'},
+  {jp:'あさ',ro:'아사',kr:'아침',cat:'시간'},
+  {jp:'ひる',ro:'히루',kr:'낮 / 점심',cat:'시간'},
+  {jp:'よる',ro:'요루',kr:'밤',cat:'시간'},
+  {jp:'なんじ',ro:'난지',kr:'몇 시예요?',cat:'시간'},
+  {jp:'ごぜん',ro:'고젠',kr:'오전',cat:'시간'},
+  {jp:'ごご',ro:'고고',kr:'오후',cat:'시간'},
+  // 쇼핑 (set 8)
+  {jp:'いくら',ro:'이쿠라',kr:'얼마예요?',cat:'쇼핑'},
+  {jp:'えん',ro:'엔',kr:'엔 (¥)',cat:'쇼핑'},
+  {jp:'これ',ro:'코레',kr:'이것',cat:'쇼핑'},
+  {jp:'それ',ro:'소레',kr:'그것',cat:'쇼핑'},
+  {jp:'あれ',ro:'아레',kr:'저것',cat:'쇼핑'},
+  {jp:'おつり',ro:'오츠리',kr:'거스름돈',cat:'쇼핑'},
+  {jp:'レシート',ro:'레시-토',kr:'영수증',cat:'쇼핑'},
+  {jp:'ふくろ',ro:'후쿠로',kr:'봉투',cat:'쇼핑'},
+  {jp:'カード',ro:'카-도',kr:'카드',cat:'쇼핑'},
+  {jp:'げんきん',ro:'겡킨',kr:'현금',cat:'쇼핑'},
+  // 신체·건강 (set 9)
+  {jp:'あたま',ro:'아타마',kr:'머리',cat:'신체·건강'},
+  {jp:'おなか',ro:'오나카',kr:'배',cat:'신체·건강'},
+  {jp:'いたい',ro:'이타이',kr:'아파요',cat:'신체·건강'},
+  {jp:'ねつ',ro:'네츠',kr:'열',cat:'신체·건강'},
+  {jp:'くすり',ro:'쿠스리',kr:'약',cat:'신체·건강'},
+  {jp:'びょうき',ro:'뵤-키',kr:'병',cat:'신체·건강'},
+  {jp:'て',ro:'테',kr:'손',cat:'신체·건강'},
+  {jp:'あし',ro:'아시',kr:'발 / 다리',cat:'신체·건강'},
+  {jp:'め',ro:'메',kr:'눈',cat:'신체·건강'},
+  {jp:'はな',ro:'하나',kr:'코',cat:'신체·건강'},
+];
+
 /* ─── 단어장 ─── */
 let VOCAB_OFFSET=0,VOCAB_KNOWN_SET=new Set();
 function getVocabWords(offset){
   const d=new Date();d.setDate(d.getDate()+offset);
-  const seed=d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();
-  const len=ALL_PHRASES.length;
-  const step=Math.max(1,Math.floor(len/10));
-  return Array.from({length:10},(_,i)=>ALL_PHRASES[(seed+i*step)%len]);
+  const dayNum=Math.floor(d.getTime()/86400000);
+  const setIdx=((dayNum%10)+10)%10;
+  return VOCAB_WORDS.slice(setIdx*10,setIdx*10+10);
 }
 function getVocabDateLabel(offset){
   const d=new Date();d.setDate(d.getDate()+offset);
@@ -2706,14 +2819,17 @@ function renderVocab(){
   document.getElementById('vocab-list').innerHTML=words.map((p,i)=>`
     <div class="vocab-card" id="vcard-${i}" onclick="toggleVocabCard(${i})">
       <div class="vocab-front">
-        <div class="vocab-jp">${p.jp}</div>
+        <div style="flex:1">
+          <div style="font-size:10px;color:#bbb;letter-spacing:.05em;margin-bottom:4px">${p.cat}</div>
+          <div class="vocab-jp">${p.jp}</div>
+        </div>
         <span class="vocab-arrow">›</span>
       </div>
       <div class="vocab-back">
         <div class="vocab-ro">${p.ro}</div>
         <div class="vocab-kr">${p.kr}</div>
         <div class="vocab-actions">
-          <button class="vocab-spk" onclick="spkT('${p.jp.replace(/'/g,"&#39;")}');event.stopPropagation()">🔊</button>
+          <button class="vocab-spk" onclick="spkT('${(p.tts||p.jp).replace(/'/g,"&#39;")}');event.stopPropagation()">🔊</button>
           <button class="vocab-known-btn" id="vknown-${i}" onclick="markVocabKnown(${i});event.stopPropagation()">알아요 ✓</button>
         </div>
       </div>
