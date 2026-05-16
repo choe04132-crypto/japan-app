@@ -227,6 +227,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans
 .listen-card{padding:22px 16px;text-align:center;background:#fff8f5;border-radius:14px;border:1px solid #fde0d8;margin-bottom:12px;cursor:pointer}
 .listen-icon{font-size:42px;margin-bottom:6px}
 .listen-hint{font-size:12px;color:#c0392b;font-weight:500}
+/* ─── 단어장 ─── */
+.vocab-wrap{padding:0 16px 32px}
+.vocab-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0 8px}
+.vocab-nav-btn{background:none;border:1.5px solid #e0ddd8;border-radius:10px;padding:6px 16px;font-size:15px;cursor:pointer;color:#555;font-family:inherit}
+.vocab-nav-btn:disabled{opacity:.3;cursor:default}
+.vocab-date{font-size:14px;font-weight:600;color:#1a1a1a}
+.vocab-prog{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.vocab-prog-bar{flex:1;height:5px;background:#e8e5e0;border-radius:99px;overflow:hidden}
+.vocab-prog-fill{height:100%;background:#27ae60;border-radius:99px;transition:width .3s}
+.vocab-prog-lbl{font-size:12px;color:#888;flex-shrink:0;min-width:52px;text-align:right}
+.vocab-card{background:#fff;border:1px solid #e8e5e0;border-radius:16px;margin-bottom:10px;overflow:hidden;cursor:pointer;user-select:none}
+.vocab-card:active{background:#f9f7f4}
+.vocab-front{display:flex;align-items:center;gap:10px;padding:14px 16px}
+.vocab-jp{font-size:18px;font-weight:600;color:#1a1a1a;flex:1}
+.vocab-arrow{font-size:16px;color:#ccc;flex-shrink:0;transition:transform .25s}
+.vocab-card.open .vocab-arrow{transform:rotate(90deg);color:#c0392b}
+.vocab-back{display:none;padding:0 16px 14px;border-top:1px solid #f0ede8}
+.vocab-card.open .vocab-back{display:block}
+.vocab-ro{font-size:13px;color:#c0392b;font-weight:500;margin-bottom:3px;padding-top:12px}
+.vocab-kr{font-size:13px;color:#666;margin-bottom:10px}
+.vocab-actions{display:flex;gap:8px;align-items:center}
+.vocab-spk{width:32px;height:32px;border-radius:50%;border:1px solid #e0ddd8;background:none;cursor:pointer;font-size:15px;flex-shrink:0}
+.vocab-known-btn{padding:5px 12px;border:1.5px solid #27ae60;border-radius:10px;background:none;color:#27ae60;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s}
+.vocab-card.known .vocab-front{background:#f0fff4}
+.vocab-card.known .vocab-known-btn{background:#27ae60;color:#fff}
 </style>
 </head>
 <body>
@@ -279,6 +304,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans
     <div class="nav-item" onclick="go('sc-sim')">
       <div class="nav-icon">💬</div>
       <div class="nav-text"><div class="nav-title">대화 시뮬레이터</div><div class="nav-sub">실전 상황 연습 · 3가지 시나리오</div></div>
+      <span style="color:#ccc;font-size:18px">›</span>
+    </div>
+    <div class="nav-item" onclick="go('sc-vocab')" style="border-color:#c8e6c8;background:#f5fff5">
+      <div class="nav-icon">📖</div>
+      <div class="nav-text"><div class="nav-title">단어장</div><div class="nav-sub">오늘의 단어 10개 학습</div></div>
       <span style="color:#ccc;font-size:18px">›</span>
     </div>
     <div class="nav-item" onclick="go('sc-review')" style="border-color:#fde0d8;background:#fff8f5" id="review-nav">
@@ -396,6 +426,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans
     <span class="topbar-right" id="phrase-lbl"></span>
   </div>
   <div class="pw" id="phrase-content"></div>
+</div>
+
+<!-- 단어장 -->
+<div id="sc-vocab" class="screen">
+  <div class="topbar">
+    <button class="back-btn" onclick="go('sc-home')" aria-label="뒤로">←</button>
+    <span class="topbar-title">📖 단어장</span>
+  </div>
+  <div class="vocab-wrap">
+    <div class="vocab-nav">
+      <button class="vocab-nav-btn" onclick="changeVocabDay(-1)">←</button>
+      <span class="vocab-date" id="vocab-date-lbl"></span>
+      <button class="vocab-nav-btn" id="vocab-next-btn" onclick="changeVocabDay(1)">→</button>
+    </div>
+    <div class="vocab-prog">
+      <div class="vocab-prog-bar"><div class="vocab-prog-fill" id="vocab-prog-fill" style="width:0%"></div></div>
+      <span class="vocab-prog-lbl" id="vocab-prog-lbl">0/10 암기</span>
+    </div>
+    <div id="vocab-list"></div>
+  </div>
 </div>
 
 <!-- 보관함 -->
@@ -1664,7 +1714,7 @@ try{
 function save(){try{localStorage.setItem(KEY,JSON.stringify(ST));}catch(e){}}
 
 let CU=null,CT=null,QI=0,QA=false,showM=false,QMODE=0;
-let openReplies={};
+let openReplies={},DAILY_OFFSET=0;
 function ud(){return ST[CU.id];}
 function tH(uid){return(ST[uid].hira||[]).length;}
 function tK(uid){return(ST[uid].kata||[]).length;}
@@ -1705,6 +1755,7 @@ function go(id){
   else if(id==='sc-vault')renderVault();
   else if(id==='sc-numbers'){NUM_TAB=0;renderNumbers();}
   else if(id==='sc-sim')renderSim();
+  else if(id==='sc-vocab'){VOCAB_OFFSET=0;renderVocab();}
   else if(id==='sc-review')renderReview();
   else if(id==='sc-search'){
     document.getElementById('search-input').value='';
@@ -1751,11 +1802,44 @@ function renderHome(){
   document.getElementById('review-nav-sub').textContent=due>0?`오늘 복습할 표현 ${due}개 있어요`:'틀린 표현 위주로 반복 학습';
   renderStreak();
 
-  const seed=new Date().getDate();
-  const daily=[0,7,14].map(o=>ALL_PHRASES[(seed+o)%ALL_PHRASES.length]);
+  renderDailyBox();
+
+  const ot=USERS.find(u=>u.id!==CU.id);
+  document.getElementById('other-stat').innerHTML=`<div class="other-row">
+    <div style="font-size:22px">${ot.icon}</div>
+    <div><div style="font-size:14px;font-weight:600">${ot.name}</div>
+    <div style="font-size:12px;color:#888;margin-top:2px">표현 ${tT(ot.id)}/${ALL_PHRASES.length} · ⭐외운 것 ${tM(ot.id)}개</div></div>
+  </div>`;
+}
+function toggleReply(rid){
+  const box=document.getElementById(rid),btn=document.getElementById('rt-'+rid);
+  const isOpen=box.classList.contains('open');
+  box.classList.toggle('open',!isOpen);btn.classList.toggle('open',!isOpen);
+  btn.textContent=isOpen?'💬 상대방 예상 답변 보기':'💬 답변 접기';
+}
+
+function getDailyPhrases(offset){
+  const d=new Date();d.setDate(d.getDate()+offset);
+  const seed=d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();
+  return[0,7,14].map(o=>ALL_PHRASES[(seed+o)%ALL_PHRASES.length]);
+}
+function getDayLabel(offset){
+  const d=new Date();d.setDate(d.getDate()+offset);
+  const m=d.getMonth()+1,day=d.getDate();
+  if(offset===0)return'오늘';
+  if(offset===-1)return`어제 (${m}/${day})`;
+  return`${m}/${day}`;
+}
+function renderDailyBox(){
+  const daily=getDailyPhrases(DAILY_OFFSET);
+  const label=getDayLabel(DAILY_OFFSET);
   openReplies={};
   document.getElementById('daily-box').innerHTML=`
-    <div class="daily-lbl">☀️ 오늘의 표현 3개</div>
+    <div class="daily-lbl" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <button onclick="changeDailyDay(-1)" style="background:none;border:1.5px solid #ddd;border-radius:8px;padding:3px 10px;font-size:15px;cursor:pointer;color:#555;line-height:1">←</button>
+      <span>☀️ ${label}의 표현 3개</span>
+      <button onclick="changeDailyDay(1)" style="background:none;border:1.5px solid #ddd;border-radius:8px;padding:3px 10px;font-size:15px;${DAILY_OFFSET>=0?'opacity:.3;cursor:default':'cursor:pointer;color:#555'};line-height:1">→</button>
+    </div>
     <div class="daily-items">${daily.map((p,i)=>{
       const rid='rep-'+i;
       return`<div class="d-item">
@@ -1777,19 +1861,10 @@ function renderHome(){
         </div>`:''}
       </div>`;
     }).join('')}</div>`;
-
-  const ot=USERS.find(u=>u.id!==CU.id);
-  document.getElementById('other-stat').innerHTML=`<div class="other-row">
-    <div style="font-size:22px">${ot.icon}</div>
-    <div><div style="font-size:14px;font-weight:600">${ot.name}</div>
-    <div style="font-size:12px;color:#888;margin-top:2px">표현 ${tT(ot.id)}/${ALL_PHRASES.length} · ⭐외운 것 ${tM(ot.id)}개</div></div>
-  </div>`;
 }
-function toggleReply(rid){
-  const box=document.getElementById(rid),btn=document.getElementById('rt-'+rid);
-  const isOpen=box.classList.contains('open');
-  box.classList.toggle('open',!isOpen);btn.classList.toggle('open',!isOpen);
-  btn.textContent=isOpen?'💬 상대방 예상 답변 보기':'💬 답변 접기';
+function changeDailyDay(delta){
+  DAILY_OFFSET=Math.max(-30,Math.min(0,DAILY_OFFSET+delta));
+  renderDailyBox();
 }
 
 /* ─── 검색 ─── */
@@ -2049,54 +2124,54 @@ function shuffle(a){return a.slice().sort(()=>Math.random()-.5);}
 /* ─── 숫자·금액 연습 ─── */
 let NUM_TAB=0,NUM_QI=0,NUM_QA=false;
 const NUMS_BASIC=[
-  {jp:'一',ro:'이치',kr:'1'},
-  {jp:'二',ro:'니',kr:'2'},
-  {jp:'三',ro:'산',kr:'3'},
-  {jp:'四',ro:'시/욘',kr:'4'},
-  {jp:'五',ro:'고',kr:'5'},
-  {jp:'六',ro:'로쿠',kr:'6'},
-  {jp:'七',ro:'시치/나나',kr:'7'},
-  {jp:'八',ro:'하치',kr:'8'},
-  {jp:'九',ro:'큐/쿠',kr:'9'},
-  {jp:'十',ro:'쥬',kr:'10'},
-  {jp:'百',ro:'햐쿠',kr:'100'},
-  {jp:'千',ro:'센',kr:'1,000'},
-  {jp:'万',ro:'만',kr:'10,000'},
+  {jp:'一',hira:'いち',ro:'이치',kr:'1'},
+  {jp:'二',hira:'に',ro:'니',kr:'2'},
+  {jp:'三',hira:'さん',ro:'산',kr:'3'},
+  {jp:'四',hira:'し',ro:'시/욘',kr:'4'},
+  {jp:'五',hira:'ご',ro:'고',kr:'5'},
+  {jp:'六',hira:'ろく',ro:'로쿠',kr:'6'},
+  {jp:'七',hira:'しち',ro:'시치/나나',kr:'7'},
+  {jp:'八',hira:'はち',ro:'하치',kr:'8'},
+  {jp:'九',hira:'きゅう',ro:'큐/쿠',kr:'9'},
+  {jp:'十',hira:'じゅう',ro:'쥬',kr:'10'},
+  {jp:'百',hira:'ひゃく',ro:'햐쿠',kr:'100'},
+  {jp:'千',hira:'せん',ro:'센',kr:'1,000'},
+  {jp:'万',hira:'まん',ro:'만',kr:'10,000'},
 ];
 const NUMS_MONEY=[
-  {jp:'百円',ro:'햐쿠엔',kr:'100엔'},
-  {jp:'二百円',ro:'니햐쿠엔',kr:'200엔'},
-  {jp:'三百円',ro:'산뱌쿠엔',kr:'300엔 (변칙)'},
-  {jp:'四百円',ro:'욘햐쿠엔',kr:'400엔'},
-  {jp:'五百円',ro:'고햐쿠엔',kr:'500엔'},
-  {jp:'六百円',ro:'롯뺘쿠엔',kr:'600엔 (변칙)'},
-  {jp:'七百円',ro:'나나햐쿠엔',kr:'700엔'},
-  {jp:'八百円',ro:'핫뺘쿠엔',kr:'800엔 (변칙)'},
-  {jp:'九百円',ro:'큐햐쿠엔',kr:'900엔'},
-  {jp:'千円',ro:'센엔',kr:'1,000엔'},
-  {jp:'二千円',ro:'니센엔',kr:'2,000엔'},
-  {jp:'三千円',ro:'산젠엔',kr:'3,000엔 (변칙)'},
-  {jp:'五千円',ro:'고센엔',kr:'5,000엔'},
-  {jp:'一万円',ro:'이치만엔',kr:'10,000엔'},
-  {jp:'二万円',ro:'니만엔',kr:'20,000엔'},
-  {jp:'三万円',ro:'산만엔',kr:'30,000엔'},
+  {jp:'百円',hira:'ひゃくえん',ro:'햐쿠엔',kr:'100엔'},
+  {jp:'二百円',hira:'にひゃくえん',ro:'니햐쿠엔',kr:'200엔'},
+  {jp:'三百円',hira:'さんびゃくえん',ro:'산뱌쿠엔',kr:'300엔 (변칙)'},
+  {jp:'四百円',hira:'よんひゃくえん',ro:'욘햐쿠엔',kr:'400엔'},
+  {jp:'五百円',hira:'ごひゃくえん',ro:'고햐쿠엔',kr:'500엔'},
+  {jp:'六百円',hira:'ろっぴゃくえん',ro:'롯뺘쿠엔',kr:'600엔 (변칙)'},
+  {jp:'七百円',hira:'ななひゃくえん',ro:'나나햐쿠엔',kr:'700엔'},
+  {jp:'八百円',hira:'はっぴゃくえん',ro:'핫뺘쿠엔',kr:'800엔 (변칙)'},
+  {jp:'九百円',hira:'きゅうひゃくえん',ro:'큐햐쿠엔',kr:'900엔'},
+  {jp:'千円',hira:'せんえん',ro:'센엔',kr:'1,000엔'},
+  {jp:'二千円',hira:'にせんえん',ro:'니센엔',kr:'2,000엔'},
+  {jp:'三千円',hira:'さんぜんえん',ro:'산젠엔',kr:'3,000엔 (변칙)'},
+  {jp:'五千円',hira:'ごせんえん',ro:'고센엔',kr:'5,000엔'},
+  {jp:'一万円',hira:'いちまんえん',ro:'이치만엔',kr:'10,000엔'},
+  {jp:'二万円',hira:'にまんえん',ro:'니만엔',kr:'20,000엔'},
+  {jp:'三万円',hira:'さんまんえん',ro:'산만엔',kr:'30,000엔'},
 ];
 const NUMS_TIME=[
-  {jp:'一時',ro:'이치지',kr:'1시'},
-  {jp:'二時',ro:'니지',kr:'2시'},
-  {jp:'三時',ro:'산지',kr:'3시'},
-  {jp:'六時',ro:'로쿠지',kr:'6시'},
-  {jp:'十二時',ro:'쥬니지',kr:'12시'},
-  {jp:'一分',ro:'잇뿐',kr:'1분 (변칙)'},
-  {jp:'三分',ro:'산뿐',kr:'3분 (변칙)'},
-  {jp:'五分',ro:'고훈',kr:'5분'},
-  {jp:'十分',ro:'쥿뿐',kr:'10분 (변칙)'},
-  {jp:'十五分',ro:'쥬고훈',kr:'15분'},
-  {jp:'三十分',ro:'산쥽뿐',kr:'30분'},
-  {jp:'四十五分',ro:'욘쥬고훈',kr:'45분'},
-  {jp:'半',ro:'한',kr:'반 (30분)'},
-  {jp:'午前',ro:'고젠',kr:'오전'},
-  {jp:'午後',ro:'고고',kr:'오후'},
+  {jp:'一時',hira:'いちじ',ro:'이치지',kr:'1시'},
+  {jp:'二時',hira:'にじ',ro:'니지',kr:'2시'},
+  {jp:'三時',hira:'さんじ',ro:'산지',kr:'3시'},
+  {jp:'六時',hira:'ろくじ',ro:'로쿠지',kr:'6시'},
+  {jp:'十二時',hira:'じゅうにじ',ro:'쥬니지',kr:'12시'},
+  {jp:'一分',hira:'いっぷん',ro:'잇뿐',kr:'1분 (변칙)'},
+  {jp:'三分',hira:'さんぷん',ro:'산뿐',kr:'3분 (변칙)'},
+  {jp:'五分',hira:'ごふん',ro:'고훈',kr:'5분'},
+  {jp:'十分',hira:'じゅっぷん',ro:'쥿뿐',kr:'10분 (변칙)'},
+  {jp:'十五分',hira:'じゅうごふん',ro:'쥬고훈',kr:'15분'},
+  {jp:'三十分',hira:'さんじゅっぷん',ro:'산쥽뿐',kr:'30분'},
+  {jp:'四十五分',hira:'よんじゅうごふん',ro:'욘쥬고훈',kr:'45분'},
+  {jp:'半',hira:'はん',ro:'한',kr:'반 (30분)'},
+  {jp:'午前',hira:'ごぜん',ro:'고젠',kr:'오전'},
+  {jp:'午後',hira:'ごご',ro:'고고',kr:'오후'},
 ];
 function setNumTab(t){
   NUM_TAB=t;
@@ -2113,7 +2188,7 @@ function renderNumbers(){
     el.innerHTML=`<div style="padding:20px 16px">
       <div style="text-align:center;margin-bottom:24px">
         <div style="font-size:48px;font-weight:700;color:#c0392b;margin-bottom:8px">${q.jp}</div>
-        <button onclick="spkNum('${q.jp}')" style="background:none;border:1px solid #e0ddd8;border-radius:20px;padding:6px 16px;cursor:pointer;font-size:13px;color:#888">🔊 듣기</button>
+        <button onclick="spkNum('${q.jp}','${q.hira||''}')" style="background:none;border:1px solid #e0ddd8;border-radius:20px;padding:6px 16px;cursor:pointer;font-size:13px;color:#888">🔊 듣기</button>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px" id="num-opts">
         ${opts.map(o=>`<button onclick="checkNumQ('${o.ro}','${q.ro}',this)" style="padding:14px;border:1.5px solid #e0ddd8;border-radius:12px;font-size:14px;background:#fff;cursor:pointer;font-weight:600">${o.kr}</button>`).join('')}
@@ -2130,11 +2205,11 @@ function renderNumbers(){
         <div style="font-size:12px;color:#c0392b;font-weight:500;margin-top:2px">${d.ro}</div>
         <div style="font-size:13px;color:#666;margin-top:2px">${d.kr}</div>
       </div>
-      <button onclick="spkNum('${d.jp}')" style="width:38px;height:38px;border-radius:50%;border:1px solid #e0ddd8;background:none;cursor:pointer;font-size:18px;flex-shrink:0">🔊</button>
+      <button onclick="spkNum('${d.jp}','${d.hira||''}')" style="width:38px;height:38px;border-radius:50%;border:1px solid #e0ddd8;background:none;cursor:pointer;font-size:18px;flex-shrink:0">🔊</button>
     </div>`).join('')}
   </div>`;
 }
-function spkNum(t){spkT(t);}
+function spkNum(t,hira){spkT(hira||t);}
 function checkNumQ(sel,ans,btn){
   if(NUM_QA)return;
   NUM_QA=true;
@@ -2424,6 +2499,7 @@ function renderConv(){
       ${step.opts.map((o,i)=>`<button onclick="selectOpt(${i})" class="sim-opt" data-ok="${o.ok}" style="display:flex;align-items:center;gap:10px">
         <div style="flex:1;text-align:left">
           <span style="font-weight:600;color:#1a1a1a;display:block">${o.text}</span>
+          <span style="font-size:11px;color:#c0392b;font-weight:500;display:block;margin-top:1px">${o.ro}</span>
           <span style="font-size:11px;color:#888;display:block;margin-top:2px">${o.kr}</span>
         </div>
         <button onclick="spkT('${o.text.replace(/'/g,"\\'")}');event.stopPropagation()" style="flex-shrink:0;width:32px;height:32px;border-radius:50%;border:1px solid #e0ddd8;background:#fff;cursor:pointer;font-size:15px">🔊</button>
@@ -2602,6 +2678,72 @@ if('serviceWorker' in navigator){
       .then(()=>console.log('SW 등록 완료'))
       .catch(e=>console.log('SW 오류:',e));
   });
+}
+
+/* ─── 단어장 ─── */
+let VOCAB_OFFSET=0,VOCAB_KNOWN_SET=new Set();
+function getVocabWords(offset){
+  const d=new Date();d.setDate(d.getDate()+offset);
+  const seed=d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();
+  const len=ALL_PHRASES.length;
+  const step=Math.max(1,Math.floor(len/10));
+  return Array.from({length:10},(_,i)=>ALL_PHRASES[(seed+i*step)%len]);
+}
+function getVocabDateLabel(offset){
+  const d=new Date();d.setDate(d.getDate()+offset);
+  const m=d.getMonth()+1,day=d.getDate();
+  if(offset===0)return`오늘 (${m}/${day})`;
+  if(offset===-1)return`어제 (${m}/${day})`;
+  return`${m}/${day}`;
+}
+function renderVocab(){
+  VOCAB_KNOWN_SET=new Set();
+  const words=getVocabWords(VOCAB_OFFSET);
+  document.getElementById('vocab-date-lbl').textContent=getVocabDateLabel(VOCAB_OFFSET);
+  const nextBtn=document.getElementById('vocab-next-btn');
+  nextBtn.disabled=VOCAB_OFFSET>=0;
+  updateVocabProg();
+  document.getElementById('vocab-list').innerHTML=words.map((p,i)=>`
+    <div class="vocab-card" id="vcard-${i}" onclick="toggleVocabCard(${i})">
+      <div class="vocab-front">
+        <div class="vocab-jp">${p.jp}</div>
+        <span class="vocab-arrow">›</span>
+      </div>
+      <div class="vocab-back">
+        <div class="vocab-ro">${p.ro}</div>
+        <div class="vocab-kr">${p.kr}</div>
+        <div class="vocab-actions">
+          <button class="vocab-spk" onclick="spkT('${p.jp.replace(/'/g,"&#39;")}');event.stopPropagation()">🔊</button>
+          <button class="vocab-known-btn" id="vknown-${i}" onclick="markVocabKnown(${i});event.stopPropagation()">알아요 ✓</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+function toggleVocabCard(i){
+  document.getElementById('vcard-'+i).classList.toggle('open');
+}
+function markVocabKnown(i){
+  const card=document.getElementById('vcard-'+i);
+  const btn=document.getElementById('vknown-'+i);
+  if(VOCAB_KNOWN_SET.has(i)){
+    VOCAB_KNOWN_SET.delete(i);
+    card.classList.remove('known');
+    btn.textContent='알아요 ✓';
+  }else{
+    VOCAB_KNOWN_SET.add(i);
+    card.classList.add('known');
+    btn.textContent='외웠어요 ✓';
+  }
+  updateVocabProg();
+}
+function updateVocabProg(){
+  const n=VOCAB_KNOWN_SET.size;
+  document.getElementById('vocab-prog-fill').style.width=(n/10*100)+'%';
+  document.getElementById('vocab-prog-lbl').textContent=n+'/10 암기';
+}
+function changeVocabDay(delta){
+  VOCAB_OFFSET=Math.max(-30,Math.min(0,VOCAB_OFFSET+delta));
+  renderVocab();
 }
 
 renderUS();
