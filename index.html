@@ -237,20 +237,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans
 .vocab-prog-bar{flex:1;height:5px;background:#e8e5e0;border-radius:99px;overflow:hidden}
 .vocab-prog-fill{height:100%;background:#27ae60;border-radius:99px;transition:width .3s}
 .vocab-prog-lbl{font-size:12px;color:#888;flex-shrink:0;min-width:52px;text-align:right}
-.vocab-card{background:#fff;border:1px solid #e8e5e0;border-radius:16px;margin-bottom:10px;overflow:hidden;cursor:pointer;user-select:none}
-.vocab-card:active{background:#f9f7f4}
-.vocab-front{display:flex;align-items:center;gap:10px;padding:14px 16px}
-.vocab-jp{font-size:18px;font-weight:600;color:#1a1a1a;flex:1}
-.vocab-arrow{font-size:16px;color:#ccc;flex-shrink:0;transition:transform .25s}
-.vocab-card.open .vocab-arrow{transform:rotate(90deg);color:#c0392b}
-.vocab-back{display:none;padding:0 16px 14px;border-top:1px solid #f0ede8}
-.vocab-card.open .vocab-back{display:block}
-.vocab-ro{font-size:13px;color:#c0392b;font-weight:500;margin-bottom:3px;padding-top:12px}
-.vocab-kr{font-size:13px;color:#666;margin-bottom:10px}
-.vocab-actions{display:flex;gap:8px;align-items:center}
+.vocab-card{background:#fff;border:1px solid #e8e5e0;border-radius:16px;margin-bottom:10px;overflow:hidden}
+.vocab-card.known{border-color:#27ae60;background:#f8fdf8}
+.vocab-top{display:flex;align-items:flex-start;gap:10px;padding:14px 16px 10px}
+.vocab-jp{font-size:22px;font-weight:700;color:#1a1a1a;margin-bottom:3px}
+.vocab-ro{font-size:12px;color:#c0392b;font-weight:500;margin-bottom:2px}
+.vocab-kr{font-size:13px;color:#555}
+.vocab-ex{margin:0 14px 12px;padding:10px 12px;background:#f9f7f4;border-radius:10px;border-left:3px solid #e0ddd8}
+.vocab-card.known .vocab-ex{background:#f0faf0;border-color:#a5d6a7}
+.vocab-ex-lbl{font-size:10px;font-weight:600;color:#bbb;letter-spacing:.05em;margin-bottom:5px}
+.vocab-ex-jp{font-size:13px;font-weight:600;color:#1a1a1a;line-height:1.5;margin-bottom:2px}
+.vocab-ex-ro{font-size:11px;color:#c0392b;font-weight:500;margin-bottom:2px}
+.vocab-ex-kr{font-size:12px;color:#888}
+.vocab-actions{display:flex;gap:8px;align-items:center;padding:0 14px 12px}
 .vocab-spk{width:32px;height:32px;border-radius:50%;border:1px solid #e0ddd8;background:none;cursor:pointer;font-size:15px;flex-shrink:0}
 .vocab-known-btn{padding:5px 12px;border:1.5px solid #27ae60;border-radius:10px;background:none;color:#27ae60;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s}
-.vocab-card.known .vocab-front{background:#f0fff4}
 .vocab-card.known .vocab-known-btn{background:#27ae60;color:#fff}
 </style>
 </head>
@@ -2817,28 +2818,25 @@ function renderVocab(){
   nextBtn.disabled=VOCAB_OFFSET>=0;
   updateVocabProg();
   document.getElementById('vocab-list').innerHTML=words.map((p,i)=>`
-    <div class="vocab-card" id="vcard-${i}" onclick="toggleVocabCard(${i})">
-      <div class="vocab-front">
+    <div class="vocab-card" id="vcard-${i}">
+      <div class="vocab-top">
         <div style="flex:1">
-          <div style="font-size:10px;color:#bbb;letter-spacing:.05em;margin-bottom:4px">${p.cat}</div>
+          <div style="font-size:10px;color:#bbb;letter-spacing:.05em;margin-bottom:5px">${p.cat}</div>
           <div class="vocab-jp">${p.jp}</div>
+          <div class="vocab-ro">${p.ro}</div>
+          <div class="vocab-kr">${p.kr}</div>
         </div>
-        <span class="vocab-arrow">›</span>
+        <button class="vocab-spk" onclick="spkT('${(p.tts||p.jp).replace(/'/g,"&#39;")}')" title="단어 듣기">🔊</button>
       </div>
-      <div class="vocab-back">
-        <div class="vocab-ro">${p.ro}</div>
-        <div class="vocab-kr">${p.kr}</div>
-        ${p.ex?`<div style="margin:10px 0 8px;padding-top:10px;border-top:1px solid #f0ede8">
-          <div style="font-size:10px;color:#bbb;letter-spacing:.05em;margin-bottom:6px">예문</div>
-          <div style="font-size:14px;font-weight:600;color:#1a1a1a;line-height:1.5;margin-bottom:2px">${p.ex.jp}</div>
-          <div style="font-size:11px;color:#c0392b;font-weight:500;margin-bottom:2px">${p.ex.ro}</div>
-          <div style="font-size:12px;color:#666">${p.ex.kr}</div>
-        </div>`:''}
-        <div class="vocab-actions">
-          <button class="vocab-spk" onclick="spkT('${(p.tts||p.jp).replace(/'/g,"&#39;")}');event.stopPropagation()" title="단어 듣기">🔊</button>
-          ${p.ex?`<button onclick="spkT('${p.ex.jp.replace(/'/g,"&#39;")}');event.stopPropagation()" style="padding:4px 10px;border:1px solid #e0ddd8;border-radius:10px;background:none;cursor:pointer;font-size:12px;color:#888;font-family:inherit;flex-shrink:0">🔊 예문</button>`:''}
-          <button class="vocab-known-btn" id="vknown-${i}" onclick="markVocabKnown(${i});event.stopPropagation()">알아요 ✓</button>
-        </div>
+      ${p.ex?`<div class="vocab-ex">
+        <div class="vocab-ex-lbl">예문</div>
+        <div class="vocab-ex-jp">${p.ex.jp}</div>
+        <div class="vocab-ex-ro">${p.ex.ro}</div>
+        <div class="vocab-ex-kr">${p.ex.kr}</div>
+      </div>`:''}
+      <div class="vocab-actions">
+        ${p.ex?`<button onclick="spkT('${p.ex.jp.replace(/'/g,"&#39;")}')" style="padding:4px 10px;border:1px solid #e0ddd8;border-radius:10px;background:none;cursor:pointer;font-size:12px;color:#888;font-family:inherit;flex-shrink:0">🔊 예문</button>`:''}
+        <button class="vocab-known-btn" id="vknown-${i}" onclick="markVocabKnown(${i})">알아요 ✓</button>
       </div>
     </div>`).join('');
 }
