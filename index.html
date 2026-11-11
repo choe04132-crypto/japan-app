@@ -394,6 +394,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans
   <div class="topbar">
     <button class="back-btn" onclick="go('sc-home')" aria-label="뒤로">←</button>
     <span class="topbar-title">히라가나 기초</span>
+    <button class="switch-btn" onclick="startKanaQuiz('hira')">✏️ 퀴즈</button>
     <span class="topbar-right" id="hira-lbl"></span>
   </div>
   <div class="hira-wrap" id="hira-content"></div>
@@ -404,9 +405,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans
   <div class="topbar">
     <button class="back-btn" onclick="go('sc-home')" aria-label="뒤로">←</button>
     <span class="topbar-title">가타카나 메뉴판</span>
+    <button class="switch-btn" onclick="startKanaQuiz('kata')">✏️ 퀴즈</button>
     <span class="topbar-right" id="kata-lbl"></span>
   </div>
   <div class="kata-wrap" id="kata-content"></div>
+</div>
+
+<!-- 가나(히라가나/가타카나) 퀴즈 -->
+<div id="sc-kquiz" class="screen">
+  <div class="topbar">
+    <button class="back-btn" onclick="go(KQ.from)" aria-label="뒤로">←</button>
+    <span class="topbar-title" id="kquiz-title">가나 퀴즈</span>
+    <span class="topbar-right" id="kquiz-lbl"></span>
+  </div>
+  <div id="kquiz-tabs"></div>
+  <div style="padding:0 16px 32px" id="kquiz-content"></div>
 </div>
 
 <!-- 주제 목록 -->
@@ -461,6 +474,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans
 
 </div>
 <script>
+/* ─── 일본어 TTS 음성 캐시 ─── */
+let _jaVoice = null;
+function getJaVoice() {
+  if (_jaVoice) return _jaVoice;
+  const voices = window.speechSynthesis.getVoices();
+  _jaVoice = voices.find(v => v.lang === 'ja-JP' && v.localService) ||
+             voices.find(v => v.lang === 'ja-JP') ||
+             voices.find(v => v.lang.startsWith('ja')) || null;
+  return _jaVoice;
+}
+if (window.speechSynthesis) {
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.addEventListener('voiceschanged', () => { _jaVoice = null; getJaVoice(); });
+}
+
 const USERS=[{id:'me',name:'나',icon:'👨',avCls:'av-me',fillCls:'fill-me'},{id:'wife',name:'아내',icon:'👩',avCls:'av-wife',fillCls:'fill-wife'}];
 const HIRA=[
   {row:'あ행',chars:[{c:'あ',r:'a'},{c:'い',r:'i'},{c:'う',r:'u'},{c:'え',r:'e'},{c:'お',r:'o'}]},
@@ -481,6 +509,19 @@ const KATA_GROUPS=[
   {label:'메뉴판 필수 📋',items:[{k:'メニュー',r:'메뉴-',kr:'메뉴'},{k:'セット',r:'셋토',kr:'세트 메뉴'},{k:'サービス',r:'사-비스',kr:'서비스'},{k:'テイクアウト',r:'테이쿠아우토',kr:'테이크아웃'}]},
 ];
 const ALL_KATA=KATA_GROUPS.flatMap(g=>g.items);
+const KATA_CHARS=[
+  {row:'ア행',chars:[{c:'ア',r:'a'},{c:'イ',r:'i'},{c:'ウ',r:'u'},{c:'エ',r:'e'},{c:'オ',r:'o'}]},
+  {row:'カ행',chars:[{c:'カ',r:'ka'},{c:'キ',r:'ki'},{c:'ク',r:'ku'},{c:'ケ',r:'ke'},{c:'コ',r:'ko'}]},
+  {row:'サ행',chars:[{c:'サ',r:'sa'},{c:'シ',r:'shi'},{c:'ス',r:'su'},{c:'セ',r:'se'},{c:'ソ',r:'so'}]},
+  {row:'タ행',chars:[{c:'タ',r:'ta'},{c:'チ',r:'chi'},{c:'ツ',r:'tsu'},{c:'テ',r:'te'},{c:'ト',r:'to'}]},
+  {row:'ナ행',chars:[{c:'ナ',r:'na'},{c:'ニ',r:'ni'},{c:'ヌ',r:'nu'},{c:'ネ',r:'ne'},{c:'ノ',r:'no'}]},
+  {row:'ハ행',chars:[{c:'ハ',r:'ha'},{c:'ヒ',r:'hi'},{c:'フ',r:'fu'},{c:'ヘ',r:'he'},{c:'ホ',r:'ho'}]},
+  {row:'マ행',chars:[{c:'マ',r:'ma'},{c:'ミ',r:'mi'},{c:'ム',r:'mu'},{c:'メ',r:'me'},{c:'モ',r:'mo'}]},
+  {row:'ヤ행',chars:[{c:'ヤ',r:'ya'},{c:'ユ',r:'yu'},{c:'ヨ',r:'yo'}]},
+  {row:'ラ행',chars:[{c:'ラ',r:'ra'},{c:'リ',r:'ri'},{c:'ル',r:'ru'},{c:'レ',r:'re'},{c:'ロ',r:'ro'}]},
+  {row:'ワ행',chars:[{c:'ワ',r:'wa'},{c:'ヲ',r:'wo'},{c:'ン',r:'n'}]},
+];
+const ALL_KATA_CHARS=KATA_CHARS.flatMap(r=>r.chars);
 
 const TOPICS=[
   {id:'restaurant',icon:'🍜',name:'식당',yt:{url:'https://www.youtube.com/watch?v=FFHjLoPbbcg',title:'식당 일본어 50문장 완전정리',sub:'한국어 해설 · 실전 상황별'},
@@ -1716,6 +1757,7 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(ST));}catch(e){}}
 
 let CU=null,CT=null,QI=0,QA=false,showM=false,QMODE=0;
 let openReplies={},DAILY_OFFSET=0;
+let KQ={from:'sc-home',set:'hira',mode:'char',idx:0,total:0,score:0,qs:[],answered:false};
 function ud(){return ST[CU.id];}
 function tH(uid){return(ST[uid].hira||[]).length;}
 function tK(uid){return(ST[uid].kata||[]).length;}
@@ -1758,6 +1800,7 @@ function go(id){
   else if(id==='sc-sim')renderSim();
   else if(id==='sc-vocab'){VOCAB_OFFSET=0;renderVocab();}
   else if(id==='sc-review')renderReview();
+  else if(id==='sc-kquiz')renderKQuizIntro();
   else if(id==='sc-search'){
     document.getElementById('search-input').value='';
     document.getElementById('search-results').innerHTML='<div class="s-empty">🔍 검색어를 입력하세요<br><br>일본어 · 한국어 · 발음<br>모두 검색 가능해요</div>';
@@ -2095,18 +2138,24 @@ function renderKata(){
 }
 
 /* ─── 음성 / 학습 기록 ─── */
-function spkT(text,btn){
-  if(!window.speechSynthesis)return;window.speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);u.lang='ja-JP';u.rate=0.85;
-  document.querySelectorAll('.spk-btn,.spk-xs,.spk-reply').forEach(b=>b.classList.remove('speaking'));
-  if(btn){btn.classList.add('speaking');u.onend=()=>btn.classList.remove('speaking');}
-  window.speechSynthesis.speak(u);
+function _speak(text, rate, btn) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const go = () => {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ja-JP'; u.rate = rate;
+    const v = getJaVoice(); if (v) u.voice = v;
+    document.querySelectorAll('.spk-btn,.spk-xs,.spk-reply,.vocab-spk').forEach(b => b.classList.remove('speaking'));
+    if (btn) { btn.classList.add('speaking'); u.onend = () => btn.classList.remove('speaking'); }
+    window.speechSynthesis.speak(u);
+  };
+  if (window.speechSynthesis.getVoices().length === 0) { setTimeout(go, 200); } else { go(); }
 }
+function spkT(text,btn){ _speak(text, 0.85, btn); }
 function spkH(c){
-  if(!window.speechSynthesis)return;window.speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(c);u.lang='ja-JP';u.rate=0.7;
+  if(!window.speechSynthesis)return;
   const card=document.getElementById('hc-'+c);if(card){card.style.borderColor='#c0392b';setTimeout(()=>card.style.borderColor='',500);}
-  window.speechSynthesis.speak(u);markH(c);
+  _speak(c, 0.7, null);markH(c);
 }
 function spkK(k){
   if(!window.speechSynthesis)return;window.speechSynthesis.cancel();
@@ -2121,6 +2170,123 @@ function markH(c){if(!ud().hira)ud().hira=[];if(!ud().hira.includes(c)){ud().hir
 function markKt(k){if(!ud().kata)ud().kata=[];if(!ud().kata.includes(k)){ud().kata.push(k);save();}}
 function markT(tid,jp){if(!ud().travel[tid])ud().travel[tid]=[];if(!ud().travel[tid].includes(jp)){ud().travel[tid].push(jp);save();}}
 function shuffle(a){return a.slice().sort(()=>Math.random()-.5);}
+
+/* ─── 히라가나/가타카나 외우기 퀴즈 ─── */
+function startKanaQuiz(set){
+  KQ.from=set==='hira'?'sc-hira':'sc-kata';
+  KQ.set=set;
+  go('sc-kquiz');
+}
+function kqPool(){return KQ.set==='hira'?ALL_HIRA:ALL_KATA_CHARS;}
+function kqSetName(){return KQ.set==='hira'?'히라가나':'가타카나';}
+function renderKQuizIntro(){
+  document.getElementById('kquiz-title').textContent=kqSetName()+' 퀴즈';
+  document.getElementById('kquiz-lbl').textContent='';
+  document.getElementById('kquiz-tabs').innerHTML=`
+    <div class="qmode-tabs" style="padding:12px 16px 0">
+      <button class="qmt${KQ.set==='hira'?' active':''}" onclick="kqSetSet('hira')">あ 히라가나</button>
+      <button class="qmt${KQ.set==='kata'?' active':''}" onclick="kqSetSet('kata')">ア 가타카나</button>
+    </div>
+    <div class="qmode-tabs" style="padding:8px 16px 0">
+      <button class="qmt${KQ.mode==='char'?' active':''}" onclick="kqSetMode('char')">한 글자씩</button>
+      <button class="qmt${KQ.mode==='word'?' active':''}" onclick="kqSetMode('word')">여러 글자(단어)</button>
+    </div>`;
+  document.getElementById('kquiz-content').innerHTML=`
+    <div style="text-align:center;padding:36px 16px">
+      <div style="font-size:48px;margin-bottom:14px">${KQ.set==='hira'?'あ':'ア'}</div>
+      <div style="font-size:13px;color:#666;margin-bottom:24px;line-height:1.7">${KQ.mode==='char'
+        ?kqSetName()+' 한 글자를 보고<br>맞는 발음을 고르세요'
+        :kqSetName()+' 2~3글자를 보고<br>맞는 발음을 고르세요'}</div>
+      <button onclick="kqStart()" style="padding:13px 28px;background:#c0392b;color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:600;cursor:pointer">퀴즈 시작</button>
+    </div>`;
+}
+function kqSetSet(s){KQ.set=s;renderKQuizIntro();}
+function kqSetMode(m){KQ.mode=m;renderKQuizIntro();}
+function kqStart(){
+  const pool=kqPool();
+  KQ.total=Math.min(KQ.mode==='word'?8:12,pool.length*2);
+  KQ.idx=0;KQ.score=0;
+  KQ.qs=kqBuildQuestions(pool,KQ.mode,KQ.total);
+  document.getElementById('kquiz-tabs').innerHTML='';
+  renderKQuizQ();
+}
+function kqBuildQuestions(pool,mode,total){
+  const qs=[];
+  if(mode==='char'){
+    const shuffled=shuffle(pool);
+    for(let i=0;i<total;i++)qs.push(kqMakeCharQ(shuffled[i%shuffled.length],pool));
+  }else{
+    for(let i=0;i<total;i++){
+      const len=2+Math.floor(Math.random()*2);
+      const items=Array.from({length:len},()=>pool[Math.floor(Math.random()*pool.length)]);
+      qs.push(kqMakeWordQ(items,pool));
+    }
+  }
+  return qs;
+}
+function kqMakeCharQ(item,pool){
+  const distractors=shuffle(pool.filter(x=>x.r!==item.r)).slice(0,3).map(x=>x.r);
+  return{display:item.c,answer:item.r,options:shuffle([item.r,...distractors]),chars:[item.c]};
+}
+function kqMakeWordQ(items,pool){
+  const display=items.map(i=>i.c).join('');
+  const answer=items.map(i=>i.r).join('');
+  const distractors=new Set();
+  let guard=0;
+  while(distractors.size<3&&guard<40){
+    guard++;
+    const combo=Array.from({length:items.length},()=>pool[Math.floor(Math.random()*pool.length)]);
+    const r=combo.map(i=>i.r).join('');
+    if(r!==answer)distractors.add(r);
+  }
+  return{display,answer,options:shuffle([answer,...Array.from(distractors)]),chars:items.map(i=>i.c)};
+}
+function renderKQuizQ(){
+  const q=KQ.qs[KQ.idx];
+  KQ.answered=false;
+  document.getElementById('kquiz-lbl').textContent=(KQ.idx+1)+'/'+KQ.total;
+  document.getElementById('kquiz-content').innerHTML=`
+    <div class="qbox">
+      <div class="listen-card" onclick="spkT('${q.display}',null)">
+        <div style="font-size:48px;font-weight:700;margin-bottom:6px">${q.display}</div>
+        <div class="listen-hint">🔊 터치해서 발음 듣기</div>
+      </div>
+      <div class="q-opts">${q.options.map(o=>`<button class="qopt" onclick="kqAnswer(this,'${o}')">${o}</button>`).join('')}</div>
+      <div class="q-res" id="kqres"></div>
+    </div>`;
+}
+function kqAnswer(btn,opt){
+  if(KQ.answered)return;KQ.answered=true;
+  const q=KQ.qs[KQ.idx];
+  const ok=opt===q.answer;
+  if(ok)KQ.score++;
+  document.querySelectorAll('#kquiz-content .qopt').forEach(b=>{b.disabled=true;if(b.textContent.trim()===q.answer)b.classList.add('correct');});
+  if(!ok)btn.classList.add('wrong');
+  const r=document.getElementById('kqres');
+  r.textContent=ok?'정답이에요! 👏':'정답: '+q.answer;
+  r.style.color=ok?'#2e7d32':'#c62828';
+  if(ok&&KQ.set==='hira'&&q.chars.length===1)markH(q.chars[0]);
+  setTimeout(()=>{
+    KQ.idx++;
+    if(KQ.idx<KQ.total)renderKQuizQ();else renderKQuizResult();
+  },900);
+}
+function renderKQuizResult(){
+  const pct=Math.round(KQ.score/KQ.total*100);
+  const emoji=pct===100?'🎉':pct>=60?'👍':'💪';
+  document.getElementById('kquiz-lbl').textContent='완료!';
+  document.getElementById('kquiz-content').innerHTML=`
+    <div style="text-align:center;padding:32px 16px">
+      <div style="font-size:56px;margin-bottom:12px">${emoji}</div>
+      <div style="font-size:22px;font-weight:700;color:#1a1a1a;margin-bottom:6px">${KQ.score}/${KQ.total} 정답</div>
+      <div style="font-size:14px;color:#888;margin-bottom:24px">정확도 ${pct}%</div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button onclick="kqStart()" style="padding:12px 20px;background:#c0392b;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer">다시 하기</button>
+        <button onclick="renderKQuizIntro()" style="padding:12px 20px;background:#f5f3f0;color:#1a1a1a;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer">모드 바꾸기</button>
+        <button onclick="go(KQ.from)" style="padding:12px 20px;background:#f5f3f0;color:#1a1a1a;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer">뒤로가기</button>
+      </div>
+    </div>`;
+}
 
 /* ─── 숫자·금액 연습 ─── */
 let NUM_TAB=0,NUM_QI=0,NUM_QA=false;
